@@ -26,7 +26,7 @@ function Contact() {
       action.resetForm(); // this will reset the our form after the submition of form
       setShowModal(true) // this will open popup modal 
 
-      const response = await fetch('https://akash-portfolio-k1np.onrender.com/contact', {
+      const response = await fetch('https://portfolio-9wyd.onrender.com/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
