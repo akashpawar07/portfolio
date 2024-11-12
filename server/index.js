@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 7070;
 
 // Important: Move CORS middleware before other middleware
 app.use(cors({
-  origin: ['https://akashpawar07.github.io/portfolio', 'http://localhost:5173', 'https://akashpawar07.github.io'],
+  origin: ['https://akashpawar07.github.io/portfolio', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
   credentials: true, // Allow credentials (cookies, etc.)
