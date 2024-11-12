@@ -8,8 +8,8 @@ const PORT = process.env.PORT || 7070;
 
 // Important: Move CORS middleware before other middleware
 app.use(cors({
-  origin: 'https://akashpawar07.github.io', // Remove the trailing slash
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: ['https://akashpawar07.github.io', 'http://localhost:5173', 'https://akashpawar07.github.io/portfolio'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Added OPTIONS
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
 }));
