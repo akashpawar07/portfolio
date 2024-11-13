@@ -3,7 +3,8 @@ import { useEffect } from 'react'
 import checkBtn from '../assets/checkBtn.png'
 import { useFormik } from 'formik';
 import { formValidationSchema } from '../Schemas/validation'
-
+// import axios from axios
+ 
 const initialValues = {
   username: "",
   useremail: "",
@@ -24,7 +25,7 @@ function Contact() {
 
       console.log(values); // when form is submiting then our onsubmit getting all values
       action.resetForm(); // this will reset the our form after the submition of form
-      setShowModal(true) // this will open popup modal 
+      setShowModal(true) // this will open popup modal  
 
       const response = await fetch('https://portfolio-xe40.onrender.com/contact', {
         method: 'POST',
@@ -84,7 +85,7 @@ function Contact() {
     <>
       <section id="contact" className="min-h-screen flex items-center justify-center">
           <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md md:w-[50%]">
-            <h2 className="mb-4 text-3xl md:text-4xl tracking-tight font-bold">Contact me</h2>
+            <h2 className="mb-4 text-3xl md:text-4xl text-center py-3 tracking-tight font-bold">Contact me</h2>
             <p className='mb-3 italic '>Feel free to contact me with any questions.</p>
             <form action="#" className="space-y-8"
               onSubmit={handleSubmit}>

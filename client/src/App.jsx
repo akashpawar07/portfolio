@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState('portfolio/home');
 
   useEffect(() => {
     // Force scroll to top on page load/refresh
@@ -28,7 +28,7 @@ const App = () => {
       setShowScrollButton(window.scrollY > 400);
 
       // Update active section based on scroll position
-      const sections = ['home', 'about', 'skills', 'projects', 'contact'];
+      const sections = ['portfolio/home', 'portfolio/about', 'portfolio/skills', 'portfolio/projects', 'portfolio/contact'];
       const sectionElements = sections.map(section => 
         document.getElementById(section)
       );
@@ -95,19 +95,19 @@ const App = () => {
         />
         
         <main className="overflow-x-hidden">
-          <section id="home">
+          <section id="portfolio/home">
             <HomePage />
           </section>
-          <section id="about">
+          <section id="portfolio/about">
             <AboutPage />
           </section>
-          <section id="skills">
+          <section id="portfolio/skills">
             <SkillsPage />
           </section>
-          <section id="projects">
+          <section id="portfolio/projects">
             <ProjectPage />
           </section>
-          <section id="contact">
+          <section id="portfolio/contact">
             <ContactPage />
           </section>
         </main>
