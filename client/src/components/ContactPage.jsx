@@ -84,8 +84,8 @@ function Contact() {
   return (
     <>
       <section id="contact" className="min-h-screen flex items-center justify-center">
-          <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md md:w-[50%]">
-            <h2 className="mb-4 text-3xl md:text-4xl text-center py-3 tracking-tight font-bold">Contact me</h2>
+          <div className="py-8 lg:py-10 px-4 mx-auto max-w-screen-md md:w-[50%] ">
+            <h2 className="mb-3 text-3xl md:text-4xl text-center py-3 tracking-tight font-bold">Contact me</h2>
             <p className='mb-3 italic '>Feel free to contact me with any questions.</p>
             <form action="#" className="space-y-8"
               onSubmit={handleSubmit}>

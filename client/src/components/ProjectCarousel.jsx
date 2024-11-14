@@ -234,7 +234,7 @@ const ProjectsCarousel = () => {
                 <ChevronLeft className="w-6 h-6 text-gray-800 dark:text-gray-200 group-hover:text-blue-500" />
             </button>
 
-            <div className="w-full md:max-w-5xl mx-auto px-4 py-2 flex justify-center ">
+            <div className="w-full md:max-w-5xl mx-auto px-4 py-2 mt-[-15px] flex justify-center ">
                 <div className="relative w-[34%] md:w-[98%] h-[80vh] overflow-hidden rounded-xl shadow-2xl 
                        dark:bg-gray-800/50 backdrop-blur 
                       border border-gray-200 dark:border-gray-700">

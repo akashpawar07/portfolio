@@ -32,7 +32,7 @@ export default function SkillsPage() {
                     </div>
 
                     {/*langueges cards section */}
-                    <div className='md:h-[80vh] md:w-[50%] h-[65vh] gap-3 flex md:flex-row flex-col items-center justify-evenly md:flex-wrap overflow-y-auto no-scrollbar scroll-smooth p-2 md:border rounded-md bg-gray-800'>
+                    <div className='md:h-[80vh] md:w-[50%] h-[65vh] gap-3 flex md:flex-row flex-col items-center justify-evenly md:flex-wrap overflow-y-auto no-scrollbar scroll-smooth rounded-md bg-gray-800'>
 
                         {/* Java */}
                         <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf] '>

@@ -63,7 +63,7 @@ const About = () => {
       <div className="p-4 md:mt-[80px] mt-[80px] flex flex-col gap-10 items-center text-center">
         <h3
           ref={headingRef}
-          className="md:text-[25px] text-2xl mt-5 dark:text-neutral-100 slide-in-left"
+          className="md:text-[25px] text-2xl dark:text-neutral-100 slide-in-left"
         >
           A BIT ABOUT ME
         </h3>
