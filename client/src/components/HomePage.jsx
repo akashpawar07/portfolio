@@ -22,8 +22,8 @@ function Home() {
 
   return (
     <>
-      <section id='home' className="min-h-screen flex items-center justify-center ">
-        <div className='w-[97vw] md:h-screen flex md:flex-row justify-center flex-col-reverse gap-1 p-2 '>
+      <section id='home' className="min-h-screen flex items-center justify-center">
+        <div className='w-[97vw] md:h-screen flex md:flex-row justify-center flex-col-reverse gap-1 p-2 '>  
 
           {/* lefside section of Home page */}
           <div className=' md:w-[45%] md:p-[30px] p-6 flex flex-col gap-4 mt-[33px] ml-[px] ' >

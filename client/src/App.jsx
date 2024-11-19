@@ -9,9 +9,18 @@ import Navbar from './components/Navbar';
 import Footer from "./components/Footer";
 
 const App = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  // Initialize darkMode from localStorage or default to true
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('darkMode');
+    return savedTheme !== null ? JSON.parse(savedTheme) : true; // Default to true for dark mode
+  });
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [activeSection, setActiveSection] = useState('portfolio/home');
+
+  // Effect to handle dark mode
+  useEffect(() => {
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
+  }, [darkMode]);
 
   useEffect(() => {
     // Force scroll to top on page load/refresh
@@ -29,7 +38,7 @@ const App = () => {
 
       // Update active section based on scroll position
       const sections = ['portfolio/home', 'portfolio/about', 'portfolio/skills', 'portfolio/projects', 'portfolio/contact'];
-      const sectionElements = sections.map(section => 
+      const sectionElements = sections.map(section =>
         document.getElementById(section)
       );
 
@@ -77,24 +86,23 @@ const App = () => {
   };
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    setDarkMode(prevMode => !prevMode);
   };
 
   return (
     <div className={darkMode ? 'dark' : ''}>
       <div
-        className={`min-h-screen pt-16 ${
-          darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
-        }`}
+        className={`min-h-screen pt-16 md:pt-0 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+          }`}
       >
-        <Navbar 
-          darkMode={darkMode} 
-          toggleDarkMode={toggleDarkMode} 
+        <Navbar
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
           activeSection={activeSection}
           scrollToSection={scrollToSection}
         />
-        
-        <main className="overflow-x-hidden">
+
+        <main className="overflow-x-hidden home">
           <section id="portfolio/home">
             <HomePage />
           </section>
@@ -111,7 +119,6 @@ const App = () => {
             <ContactPage />
           </section>
         </main>
-        
         <Footer />
 
         <button
@@ -131,11 +138,11 @@ const App = () => {
           `}
           aria-label="Scroll to top"
         >
-          <ChevronUp 
+          <ChevronUp
             className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1"
           />
-          
-          <span 
+
+          <span
             className="
               absolute -top-8
               text-sm

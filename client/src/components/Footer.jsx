@@ -1,11 +1,15 @@
 import React from 'react'
 import Socialmedia from './Socialmedia'
+// import AIassistance from '../components/AI-assistance'
 
 
 function Footer() {
 
     return (
         <>
+        <div className='flex justify-center items-center'>
+        {/* <AIassistance/> */}
+        </div>
             <div className='items-center flex justify-center flex-col w-screen h-[120px] mt-[30px] gap-1 text-gray-300 bg-gray-700 dark:bg-slate-950 dark:text-gray-500'>
                 <Socialmedia />
                 <div>
