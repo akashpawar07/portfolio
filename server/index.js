@@ -2,21 +2,17 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const dotenv = require('dotenv').config()
-const bodyparser = require('body-parser')
 const app = express()
 const PORT = process.env.PORT || 7070;
 
-// Important: Move CORS middleware before other middleware
+// CORS configuration Middleware
 app.use(cors({
-  origin: ['https://akashpawar07.github.io/portfolio', 'http://localhost:5173'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
-  credentials: true, // Allow credentials (cookies, etc.)
-  preflightContinue: true, // Continue to the next middleware after CORS checks
-}));
+  origin : ['http://localhost:5173','https://akashpawar07.github.io/portfolio/'],
+  credentials : true
+}))
 
-// Other middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(express.static('dist'));
 
 // Database connection
@@ -27,7 +23,10 @@ const contactModels = require('./models/contactModel.js')
 app.post('/contact', async (req, res) => {
   try {
     // Validate input
-    if (!req.body.username || !req.body.useremail || !req.body.usermessage) {
+    const { username, useremail, usermessage } = req.body;
+    console.log("Received contact form data:", req.body)
+
+    if (!username || !useremail || !usermessage) {
       return res.status(400).json({
         success: false,
         message: 'Missing required fields'
@@ -35,9 +34,9 @@ app.post('/contact', async (req, res) => {
     }
 
     const details = new contactModels({
-      userName: req.body.username,
-      userEmail: req.body.useremail,
-      userMessages: req.body.usermessage
+      userName: username,
+      userEmail: useremail,
+      userMessages: usermessage
     });
 
     const data = await details.save();

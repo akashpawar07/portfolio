@@ -3,6 +3,7 @@ import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import ImageSlider from './ImageSlider';
 import MyResume from '../assets/updated_resume.pdf'
 import { FaArrowAltCircleDown } from "react-icons/fa";
+import Socialmedia from './Socialmedia'
 
 
 let model = 'https://img.freepik.com/free-photo/full-shot-man-suit-working-stairs_23-2148230807.jpg?ga=GA1.1.919035732.1724917926&semt=ais_hybrid';
@@ -22,8 +23,8 @@ function Home() {
 
   return (
     <>
-      <section id='home' className="min-h-screen flex items-center justify-center">
-        <div className='w-[97vw] md:h-screen flex md:flex-row justify-center flex-col-reverse gap-1 p-2 '>  
+      <section id='home' className="min-h-screen flex items-center justify-center py-5 ">
+        <div className='w-[97vw] md:h-screen flex md:flex-row justify-center flex-col-reverse gap-1 p-2'>  
 
           {/* lefside section of Home page */}
           <div className=' md:w-[45%] md:p-[30px] p-6 flex flex-col gap-4 mt-[33px] ml-[px] ' >
@@ -37,12 +38,14 @@ function Home() {
             <p className='font-semibold text-left text-[16px] mt-2 dark:text-neutral-100'>
               Welcome to my portfolio website! I'm a dedicated and enthusiastic computer science student with a strong desire to create innovative solutions. With a solid foundation in programming languages and a keen interest in, Backend Development, Frontend Development , I'm excited to showcase my projects and skills.
             </p>
-            <div className='flex flex-col md:items-start gap-2 text-slate-50 mt-7'>
+            <div className='flex md:items-start text-slate-50 justify-center md:justify-start mt-7 gap-5'>
               <button
                 className='active:bg-blue-800 font-semibold bg-blue-600 gap-2 rounded-md md:w-[25%] w-[35%] flex items-center justify-center text-gray-30 px-3 py-1'>
                 <a href={MyResume} download='akash-resume' className='flex gap-2'>
                   <p className=''>Resume</p> <span className='mt-1 text-[20px]'><FaArrowAltCircleDown /></span></a>
               </button>
+
+              <Socialmedia/>
 
             </div>
           </div>

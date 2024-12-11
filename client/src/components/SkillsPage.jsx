@@ -13,6 +13,8 @@ import Sql from "../assets/sql.jpg"
 import Oops from "../assets/oops.webp"
 import github from '../assets/github.webp'
 import comuni from '../assets/camun.webp'
+import reactjs from '../assets/reactjs.jpg'
+
 
 export default function SkillsPage() {
     return (
@@ -33,6 +35,20 @@ export default function SkillsPage() {
 
                     {/*langueges cards section */}
                     <div className='md:h-[80vh] md:w-[50%] h-[65vh] gap-3 flex md:flex-row flex-col items-center justify-evenly md:flex-wrap overflow-y-auto no-scrollbar scroll-smooth rounded-md '>
+
+
+                        {/* ReactJs */}
+                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf]'>
+                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
+                                <img src={reactjs} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer ' />
+                            </div>
+                            <div className='h-[190px] px-2 py-2 flex flex-col items-center justify-evenly overflow-y-auto  no-scrollbar scroll-smooth'>
+                                <p className='text-[15px] md:text-[13px]'>
+                                    React.js is a powerful JavaScript library that simplifies web development through its component-based architecture, allowing developers to create reusable UI elements that reduce code redundancy. Its Virtual DOM feature ensures fast performance by efficiently updating only necessary parts of a webpage, rather than reloading everything. The framework comes with extensive community support and a rich ecosystem of tools and libraries, making development faster and easier. What makes React particularly appealing is its simple learning curve combined with powerful features like JSX syntax and state management, making it an excellent choice for both beginners and experienced developers.
+                                </p>
+                            </div>
+
+                        </div>
 
                         {/* Java */}
                         <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf] '>
@@ -187,6 +203,8 @@ export default function SkillsPage() {
 
                         </div>
 
+
+
                     </div>
 
                 </div>
@@ -195,20 +213,3 @@ export default function SkillsPage() {
         </>
     )
 }
-
-
-{/* <div className='md:max-h-[80vh] md:w-[55%] gap-3 flex md:flex-row justify-evenly md:flex-wrap md:overflow-y-auto overflow-x-auto no-scrollbar scroll-smooth'>
-    <div className='md:w-[40%] md:h-[55%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf] '>
-        <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-            <img src={Java} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer' />
-        </div>
-        <div className='h-[190px] px-3 flex flex-col items-center justify-evenly w-[99%] overflow-y-auto  no-scrollbar scroll-smooth'>
-            <p className='text-[15px] md:text-[14px]'>Java's compiled code (bytecode) runs on any device supporting Java Virtual Machine (JVM), making it:
-                - Write Once, Run Anywhere (WORA)
-                - Independent of underlying hardware and OS
-                - Highly portable and reusable
-            </p>
-        </div>
-    </div>
-
-</div> */}

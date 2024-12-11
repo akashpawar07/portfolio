@@ -3,7 +3,7 @@ import React from 'react'
 function Socialmedia() {
     return (
         <div className="flex flex-col items-center gap-4 ">
-            <p className="text-lg font-medium">Connect with me!</p>
+            {/* <p className="text-lg font-medium">Connect with me!</p> */}
             <div className="flex gap-3">
                 {/* Instagram */}
                 <div className="relative group flex flex-col items-center">
