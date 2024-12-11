@@ -27,7 +27,7 @@ function Contact() {
         console.log('Submitting form values:', values);
         
         // Use axios for the POST request
-        const response = await axios.post('/contact', values, {
+        const response = await axios.post('https://portfolio-xe40.onrender.com/contact', values, {
           headers: {
             'Content-Type': 'application/json'
           }
