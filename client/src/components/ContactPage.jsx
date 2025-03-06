@@ -24,7 +24,7 @@ function Contact() {
 
     onSubmit: async (values, action) => {
       try {
-        
+        // console.log()
         // Use axios for the POST request
         const response = await axios.post('https://portfolio-xe40.onrender.com/contact', values, {
           headers: {
