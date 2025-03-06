@@ -24,7 +24,6 @@ function Contact() {
 
     onSubmit: async (values, action) => {
       try {
-        console.log('Submitting form values:', values);
         
         // Use axios for the POST request
         const response = await axios.post('https://portfolio-xe40.onrender.com/contact', values, {
@@ -32,8 +31,6 @@ function Contact() {
             'Content-Type': 'application/json'
           }
         });
-
-        console.log('Server response:', response.data);
         
         // Reset form and show modal on successful submission
         action.resetForm();
