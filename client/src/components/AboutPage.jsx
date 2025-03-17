@@ -75,25 +75,27 @@ const About = () => {
         </h1>
         <div className="md:w-[80%] pl-2">
           <p className="first-letter:text-4xl text-left first-letter:font-bold first-letter:text-blue-500 dark:text-neutral-100">
-            Hello, I'm Akash - Passionate Computer Science and Engineering Student and Java Programmer/ Frontend Developer / Backend Developer <br />
+            Hello, I'm Akash — a Computer Science and Engineering student passionate about full-stack development. <br />
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 mt-2 text-left">
               <p
                 ref={paragraph1Ref}
                 className="mb-3 dark:text-neutral-100 slide-in-left"
               >
-                Welcome to my portfolio website! I'm a dedicated and enthusiastic computer science student with a strong desire to create innovative solutions. With a solid foundation in programming languages and a keen interest in Backend Development, Frontend Development, I'm excited to showcase my projects and skills.
+                Welcome to my portfolio! I combine strong programming fundamentals with practical development skills to create innovative digital solutions. My technical toolkit includes JavaScript, React, NextJS, NodeJS, ExpressJS, and databases like MongoDB and MySQL.
               </p>
               <p
                 ref={paragraph2Ref}
                 className="mb-3 dark:text-neutral-100 fade-in-up"
               >
-                As a computer science student, I've developed a solid understanding of programming fundamentals, data structures. I'm proficient in languages like Java, JavaScript, Node js, Express Js, programming languages with strong understanding of databases. ie. MySQl and MongoDB
+                I'm equally comfortable working on frontend interfaces with HTML, CSS, and TailwindCSS as I am building robust backend systems.
+                My development process is strengthened by industry-standard practices using Git and GitHub, and I pride myself on creating clean, efficient code with well-structured REST APIs.
               </p>
               <p
                 ref={paragraph3Ref}
                 className="mb-3 dark:text-neutral-100 slide-in-right"
               >
-                Apart from coding, I enjoy playing kabaddi, cricket, going gym, watching movies and spending time with family and friends. These activities help me maintain a healthy work-life balance and foster creativity. Feel free to explore my portfolio.
+                Beyond coding, I maintain balance through kabaddi, cricket, fitness, movies, and quality time with family and friends.
+                Explore my projects to see how I transform ideas into functional, user-friendly applications.
               </p>
             </div>
           </p>

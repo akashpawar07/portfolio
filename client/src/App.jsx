@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronUp } from 'lucide-react';
+// import Admin from './components/Admin';
 import HomePage from './components/HomePage';
-import AboutPage from "./components/AboutPage";
+import AboutPage from './components/AboutPage';
 import ProjectPage from './components/ProjectPage';
 import SkillsPage from './components/SkillsPage';
 import ContactPage from './components/ContactPage';
 import Navbar from './components/Navbar';
-import Footer from "./components/Footer";
+import Footer from './components/Footer';
 
 const App = () => {
   // Initialize darkMode from localStorage or default to true

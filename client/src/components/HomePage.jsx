@@ -15,7 +15,7 @@ function Home() {
   // Text typing...
   let [typeEffect] = useTypewriter({
 
-    words: ['Web Developer', 'Backend Developer', 'Frontend developer', 'Java Programmer'],
+    words: ['Web Developer', 'Backend Developer', 'Frontend developer', 'MERN Developer'],
     loop: {},
     typeSpeed: 100,
     delaySpeed: 100
@@ -24,7 +24,7 @@ function Home() {
   return (
     <>
       <section id='home' className="min-h-screen flex items-center justify-center py-5 ">
-        <div className='w-[97vw] md:h-screen flex md:flex-row justify-center flex-col-reverse gap-1 p-2'>  
+        <div className='w-[97vw] md:h-screen flex md:flex-row justify-center flex-col-reverse gap-1 p-2'>
 
           {/* lefside section of Home page */}
           <div className=' md:w-[45%] md:p-[30px] p-6 flex flex-col gap-4 mt-[33px] ml-[px] ' >
@@ -36,7 +36,7 @@ function Home() {
             </h1>
 
             <p className='font-semibold text-left text-[16px] mt-2 dark:text-neutral-100'>
-              Welcome to my portfolio website! I'm a dedicated and enthusiastic computer science student with a strong desire to create innovative solutions. With a solid foundation in programming languages and a keen interest in, Backend Development, Frontend Development , I'm excited to showcase my projects and skills.
+              Welcome to my portfolio! I'm a passionate computer science student dedicated to creating innovative digital solutions. With strong foundations in programming and expertise in both frontend and backend development, I showcase here the projects that demonstrate my technical skills and problem-solving approach. I'm constantly learning and excited to take on new challenges in the tech industry
             </p>
             <div className='flex md:items-start text-slate-50 justify-center md:justify-start mt-7 gap-5'>
               <button
@@ -45,7 +45,7 @@ function Home() {
                   <p className=''>Resume</p> <span className='mt-1 text-[20px]'><FaArrowAltCircleDown /></span></a>
               </button>
 
-              <Socialmedia/>
+              <Socialmedia />
 
             </div>
           </div>

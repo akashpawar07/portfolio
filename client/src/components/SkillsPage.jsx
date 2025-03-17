@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import HiteshChoudhary from '../assets/hitesh choudhary.jpg'
+import done from '../assets/done.jpg'
+import me from '../assets/me img.jpg'
 import CSS from "../assets/css2.jpg"
 import ExpressJs from "../assets/express.png"
 import Html from "../assets/html.jpg"
@@ -9,7 +10,6 @@ import Js from "../assets/js2.jpg"
 import Nodejs from "../assets/nodejs2.jpg"
 import MongoDB from "../assets/mongodb.jpeg"
 import Sql from "../assets/sql.jpg"
-// import DoneImg from "../assets/done.jpg"
 import Oops from "../assets/oops.webp"
 import github from '../assets/github.webp'
 import comuni from '../assets/camun.webp'
@@ -27,9 +27,9 @@ export default function SkillsPage() {
 
                     {/* photo section*/}
                     <div className='bg-[#003ecb] p-1 w-[99%] md:w-[40%] md:h-[80vh] h-[70vh] flex flex-col text-center items-center overflow-hidden'>
-                        <img src={HiteshChoudhary} alt="hitesh choudhary" className='h-[250px] w-[250px] mt-2 rounded-full' />
+                        <img src={me} alt="Me" className='h-[250px] w-[250px] mt-2 rounded-full object-contain' />
                         <div className='mt-4 text-white h-[100px] md:w-[70%] w-[90%] '>
-                            <p className='md:text-[29px] text-[32px] text-gray-300 dark:text-neutral-100'>I am happy to know you that 2+ Projects deployed sucessfully! </p>
+                            <p className='md:text-[29px] text-[32px] text-gray-300 dark:text-neutral-100'>I am happy to know you that 4<span className='text-red-500'>+</span> Projects deployed sucessfully! </p>
                         </div>
                     </div>
 
