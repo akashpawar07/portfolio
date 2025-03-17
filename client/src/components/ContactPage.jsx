@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import checkBtn from '../assets/checkBtn.png'
 import { useFormik } from 'formik';
 import { formValidationSchema } from '../Schemas/validation'
-import axios from 'axios' // Make sure to install axios: npm install axios
+import axios from 'axios'
 
 const initialValues = {
   username: "",
@@ -14,6 +14,7 @@ const initialValues = {
 function Contact() {
   const [showModal, setShowModal] = useState(false)
   const [submitError, setSubmitError] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false) // New state for tracking submission
 
   // Remove global axios default and use instance instead
   const apiClient = axios.create({
@@ -32,6 +33,7 @@ function Contact() {
     onSubmit: async (values, action) => {
       try {
         setSubmitError(null);
+        setIsSubmitting(true); // Set submitting state to true when form is submitted
         
         // Use apiClient instance with relative URL
         const response = await apiClient.post('/contact', values);
@@ -45,6 +47,8 @@ function Contact() {
         
         // Set specific error message
         setSubmitError(error.response?.data?.message || 'Failed to submit form. Please try again.');
+      } finally {
+        setIsSubmitting(false); // Reset submitting state regardless of success or failure
       }
     }
   });
@@ -145,9 +149,10 @@ function Contact() {
             </div>
             <button
               type="submit"
-              className="py-3 px-5 text-sm font-medium text-center rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 w-[99%] bg-blue-700 text-neutral-100"
+              disabled={isSubmitting}
+              className={`py-3 px-5 text-sm font-medium text-center rounded-lg sm:w-fit w-[99%] bg-blue-700 text-neutral-100 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'}`}
             >
-              Send message
+              {isSubmitting ? 'Sending...' : 'Send message'}
             </button>
           </form>
         </div>
