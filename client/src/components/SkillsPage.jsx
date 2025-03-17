@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import done from '../assets/done.jpg'
+import plant from '../assets/plant.jpg'
 import me from '../assets/me img.jpg'
 import CSS from "../assets/css2.jpg"
 import ExpressJs from "../assets/express.png"
@@ -26,10 +26,20 @@ export default function SkillsPage() {
                 <div className=' flex flex-col md:flex-row w-screen h-auto p-3 gap-4 md:justify-center'>
 
                     {/* photo section*/}
-                    <div className='bg-[#003ecb] p-1 w-[99%] md:w-[40%] md:h-[80vh] h-[70vh] flex flex-col text-center items-center overflow-hidden'>
+                    <div
+                        className='bg-[#0d0b0d] p-1 w-[99%] md:w-[40%] md:h-[80vh] h-[70vh] flex flex-col text-center items-center overflow-hidden rounded-br-3xl rounded-tl-3xl'
+                        style={{
+                            backgroundImage: `url(${plant})`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat'
+                        }}
+                    >
                         <img src={me} alt="Me" className='h-[250px] w-[250px] mt-2 rounded-full object-contain' />
                         <div className='mt-4 text-white h-[100px] md:w-[70%] w-[90%] '>
-                            <p className='md:text-[29px] text-[32px] text-gray-300 dark:text-neutral-100'>I am happy to know you that 4<span className='text-red-500'>+</span> Projects deployed sucessfully! </p>
+                            <p className='md:text-[29px] text-[32px] text-gray-300 dark:text-neutral-100'>
+                                I am happy to know you that 4+ Projects deployed sucessfully!
+                            </p>
                         </div>
                     </div>
 

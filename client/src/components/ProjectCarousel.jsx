@@ -9,6 +9,90 @@ const ProjectsCarousel = () => {
     const projects = [
         {
             id: 1,
+            title: "Riya Industriyal Services",
+            tag: "Web Application ( Jan 2025- March 2025 )",
+            content: (
+                <>
+                    <span className="dark:text-gray-400 italic">
+                        Custom-built industrial services platform with integrated admin portal, delivering seamless content management and applicant tracking through modern React and Node.js architecture.
+                    </span>
+
+                    <div className="mt-6">
+                        <div className="relative">
+                            <h2 className="font-semibold mb-3 text-xl flex items-center gap-2">
+                                <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Project Overview
+                            </h2>
+                            <div className="pl-6 border-l-2 border-blue-500/20 dark:text-gray-400">
+                                This project aims to develop a comprehensive, professional website for Riya Industrial
+                                Services that seamlessly combines informative content presentation with robust backend
+                                functionality. The website will feature multiple interconnected pages including Home, About
+                                Us, Gallery, Services, Careers, and Contact Us - all designed with a cohesive, professional
+                                aesthetic that reinforces the company's brand identity.
+                            </div>
+                        </div>
+
+                        <div className="relative mt-6">
+                            <h2 className="font-semibold mb-3 text-xl flex items-center gap-2">
+                                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                                Features
+                            </h2>
+                            <div className="pl-6 border-l-2 border-green-500/20 dark:text-gray-400 space-y-2">
+                                <p>• The project's core innovation lies in its custom-built content management system, which
+                                    empowers administrators with full control over dynamic content through a secure admin
+                                    portal
+                                </p>
+                                <p>•  A streamlined contact management system allowing administrators to view, search,
+                                    and manage all customer inquiries received through the website
+                                </p>
+                                <p>•  An integrated job posting platform where administrators can create, edit, and manage
+                                    employment opportunities
+                                </p>
+                                <p>•  A public-facing careers interface where potential candidates can browse available
+                                    positions and submit applications directly through the website
+                                </p>
+
+                            </div>
+                        </div>
+
+                        <div className="relative mt-6">
+                            <h2 className="font-semibold mb-3 text-xl flex items-center gap-2">
+                                <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                                Technical Highlights
+                            </h2>
+                            <div className="pl-6 border-l-2 border-purple-500/20 dark:text-gray-400 space-y-2">
+                                <p>• Implemented responsive layouts using React framework</p>
+                                <p>• Styled with TailwindCSS to create an attractive and user-friendly interface</p>
+                                <p>• Developed APIs for efficient data retrieval and storage operations </p>
+                                <p>• Built the project using Node.js and Next.js for a robust full-stack solution </p>
+                                <p>• Utilized MongoDB database for secure and scalable data storage </p>
+                                <p>• Utilized Git and GitHub for version control and collaboration </p>
+                            </div>
+                        </div>
+
+                        <div className="relative mt-6">
+                            <h2 className="font-semibold mb-3 text-xl flex items-center gap-2">
+                                <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                Site Live
+                            </h2>
+                            <div className="pl-6 border-l-2 border-orange-500/20 ">
+                                <a
+                                    href="https://riya-industrial-services.vercel.app/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-400 italic hover:text-blue-600 hover:underline"
+                                >
+                                    https://riya-industrial-services.vercel.app/
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </>
+            )
+        },
+        {
+            id: 2,
             title: "Personal Portfolio",
             tag: "Full Stack Development",
             content: (
@@ -68,7 +152,7 @@ const ProjectsCarousel = () => {
             )
         },
         {
-            id: 2,
+            id: 3,
             title: "CAMPUS-CONNECT",
             tag: "Web Application",
             content: (
@@ -117,7 +201,7 @@ const ProjectsCarousel = () => {
                         <div className="relative mt-6">
                             <h2 className="font-semibold mb-3 text-xl flex items-center gap-2">
                                 <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                                Project URL
+                                Site Live
                             </h2>
                             <div className="pl-6 border-l-2 border-orange-500/20 flex flex-wrap">
                                 <a
@@ -135,7 +219,7 @@ const ProjectsCarousel = () => {
             )
         },
         {
-            id: 3,
+            id: 4,
             title: "CALCMATE",
             tag: "Web Application",
             content: (
