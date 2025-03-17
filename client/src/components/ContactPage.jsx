@@ -13,9 +13,16 @@ const initialValues = {
 
 function Contact() {
   const [showModal, setShowModal] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
 
-  // Configure axios base URL
-  axios.defaults.baseURL = 'https://portfolio-xe40.onrender.com'; // Your backend server URL
+  // Remove global axios default and use instance instead
+  const apiClient = axios.create({
+    baseURL: 'https://portfolio-xe40.onrender.com',
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
   
   // Formik configuration
   const { values, errors, touched, handleSubmit, handleBlur, handleChange, resetForm } = useFormik({
@@ -24,13 +31,10 @@ function Contact() {
 
     onSubmit: async (values, action) => {
       try {
+        setSubmitError(null);
         
-        // Use axios for the POST request
-        const response = await axios.post('https://portfolio-xe40.onrender.com/contact', values, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
+        // Use apiClient instance with relative URL
+        const response = await apiClient.post('/contact', values);
         
         // Reset form and show modal on successful submission
         action.resetForm();
@@ -39,8 +43,8 @@ function Contact() {
       } catch (error) {
         console.error('Error submitting form:', error.response ? error.response.data : error.message);
         
-        // Optional: Handle error (show error message to user)
-        alert('Failed to submit form. Please try again.');
+        // Set specific error message
+        setSubmitError(error.response?.data?.message || 'Failed to submit form. Please try again.');
       }
     }
   });
@@ -84,6 +88,11 @@ function Contact() {
         <div className="py-8 lg:py-10 px-4 mx-auto max-w-screen-md md:w-[50%] ">
           <h2 className="mb-3 text-3xl md:text-4xl text-center py-3 tracking-tight font-bold">Contact me</h2>
           <p className='mb-3 italic '>Feel free to contact me with any questions.</p>
+          {submitError && (
+            <div className="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+              {submitError}
+            </div>
+          )}
           <form className="space-y-8" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="text" className="block mb-2 text-sm font-medium">Your Name</label>
