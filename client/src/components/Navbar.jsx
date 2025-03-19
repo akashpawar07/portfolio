@@ -35,7 +35,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   return (
     <>
       {/* Mobile Navbar */}
-      <nav className={`md:hidden fixed w-full top-0 z-50 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'
+      <nav className={`md:hidden fixed w-full top-0 z-50 ${darkMode ? 'bg-gradient-to-l from-gray-700 to-gray-950 text-white' : 'bg-gradient-to-l  from-gray-100 to-gray-300 text-gray-800'
         } shadow-md`}>
         <div className="px-4">
           <div className="flex justify-between items-center h-16">
@@ -83,7 +83,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 
       {/* Desktop Sidebar */}
       <nav
-        className={`hidden md:block fixed left-0 top-0 h-screen z-50 transition-all duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'
+        className={`hidden md:block fixed left-0 top-0 h-screen z-50 transition-all duration-300 ${darkMode ? 'bg-gradient-to-t from-gray-700 to-gray-950 text-white' : 'bg-gradient-to-t  from-gray-200 to-gray-400 text-gray-800'
           } shadow-md ${isExpanded ? 'w-64' : 'w-16'}`}
       >
         <div className="flex flex-col h-full relative">
