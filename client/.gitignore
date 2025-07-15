@@ -1,5 +1,7 @@
-/node_modules
 
+// STRICTLY PROHIBITED ONY ADMIN CAN USE THIS FILE
+
+/node_modules
 .env
 .env.local
 .env.*.local
@@ -26,5 +28,21 @@ dist-ssr
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
+# *.sln
 *.sw?
+
+//PROJECT RUN/START COMMAND.......................................................
+// nmp run dev
+
+
+//USE THIS FOR PUSHING CODE TO GITHUB(client)...............................
+//first of all check your present work directory(PWD), then
+//git status
+//git add . or git add filename
+//git commit -m "a meaningful message"
+//git push
+
+
+// USE THIS FOR deployment OF PROJECT....................................... 
+// build command : npm run predeploy
+//deployment command : npm run deploy
