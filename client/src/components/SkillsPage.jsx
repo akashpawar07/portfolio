@@ -21,7 +21,7 @@ export default function SkillsPage() {
         <>
             <section id="skills" className="min-h-screen flex items-center justify-center flex-col">
 
-                <h1 className=' font-bold text-center text-3xl my-4'>Skills</h1>
+                <h1 className=' font-bold text-center text-3xl md:text-5xl my-4'>Skills</h1>
 
                 <div className=' flex flex-col md:flex-row w-screen h-auto p-3 gap-4 md:justify-center'>
 

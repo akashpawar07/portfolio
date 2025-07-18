@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import group2 from '../assets/group2.jpg'
-import group4 from '../assets/group4.jpg'
-import akashStudyImage from '../assets/akashStudy2.jpg'
-import lastDayOfCollege1 from '../assets/lastDayOfCollege1.jpg'
-import lastDayOfCollege2 from '../assets/lastDayOfCollege2.jpg'
-import meAdiSandip from '../assets/me Adi Sandy photo.jpg'
 import myCollegeLastDayphoto from '../assets/myCollegeLastDayphoto.jpg'
-import akkiPose from '../assets/akshay kumar pose.jpg'
-import gang from '../assets/gang.jpg'
-import gang2 from '../assets/gang2.jpg'
-import groupPhotoWithGirls from '../assets/group photo with girls.jpg'
+// import group2 from '../assets/group2.jpg'
+// import group4 from '../assets/group4.jpg'
+// import akashStudyImage from '../assets/akashStudy2.jpg'
+// import lastDayOfCollege1 from '../assets/lastDayOfCollege1.jpg'
+// import lastDayOfCollege2 from '../assets/lastDayOfCollege2.jpg'
+import meAdiSandip from '../assets/me Adi Sandy photo.jpg'
+// import myCollegeLastDayphoto from '../assets/myCollegeLastDayphoto.jpg'
+// import akkiPose from '../assets/akshay kumar pose.jpg'
+// import gang from '../assets/gang.jpg'
+// import gang2 from '../assets/gang2.jpg'
+// import groupPhotoWithGirls from '../assets/group photo with girls.jpg'
 
 const ImageSlider = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -22,35 +22,36 @@ const ImageSlider = () => {
     const images = [
         { url: `${myCollegeLastDayphoto}`, alt: 'myCollegeLastDayphoto' },
         { url: `${meAdiSandip}`, alt: 'me Adi Sandip' },
-        {
-            url: 'https://img.freepik.com/free-vector/colorful-illustration-programmer-working_23-2148281409.jpg',
-            alt: 'Programmer working illustration'
-        },
-        { url: `${group2}`, alt: 'Group 2' },
-        { url: `${group4}`, alt: 'Group 4' },
-        { url: `${lastDayOfCollege1}`, alt: 'last Day Of College 1 photo' },
-        { url: `${lastDayOfCollege2}`, alt: 'last Day Of College 2 photo' },
-        { url: `${gang}`, alt: 'gang' },
-        { url: `${gang2}`, alt: 'gang2' },
-        { url: `${groupPhotoWithGirls}`, alt: 'Group Photo with girls' },
-        { url: `${akkiPose}`, alt: 'The unique akki pose' },
-        {
-            url: 'https://img.freepik.com/free-vector/laptop-with-program-code-isometric-icon-software-development-programming-applications-dark-neon_39422-971.jpg',
-            alt: 'Programming laptop'
-        },
-        {
-            url: 'https://img.freepik.com/free-photo/representation-user-experience-interface-design_23-2150169847.jpg',
-            alt: 'UX Design'
-        },
-        { url: `${akashStudyImage}`, alt: 'whileStudying' },
-        {
-            url: 'https://img.freepik.com/free-photo/rear-view-programmer-working-all-night-long_1098-18697.jpg',
-            alt: 'Night programming'
-        },
-        {
-            url: 'https://img.freepik.com/free-vector/code-typing-concept-illustration_114360-3866.jpg',
-            alt: 'Code typing'
-        },
+        // {
+        //     url: 'https://img.freepik.com/free-vector/colorful-illustration-programmer-working_23-2148281409.jpg',
+        //     alt: 'Programmer working illustration'
+        // },
+        // { url: `${group2}`, alt: 'Group 2' },
+        // { url: `${group4}`, alt: 'Group 4' },
+        // { url: `${lastDayOfCollege1}`, alt: 'last Day Of College 1 photo' },
+        // { url: `${lastDayOfCollege2}`, alt: 'last Day Of College 2 photo' },
+        // { url: `${gang}`, alt: 'gang' },
+        // { url: `${gang2}`, alt: 'gang2' },
+        // { url: `${groupPhotoWithGirls}`, alt: 'Group Photo with girls' },
+        // { url: `${akkiPose}`, alt: 'The unique akki pose' },
+        // {
+        //     url: 'https://img.freepik.com/free-vector/laptop-with-program-code-isometric-icon-software-development-programming-applications-dark-neon_39422-971.jpg',
+        //     alt: 'Programming laptop'
+        // },
+        // {
+        //     url: 'https://img.freepik.com/free-photo/representation-user-experience-interface-design_23-2150169847.jpg',
+        //     alt: 'UX Design'
+        // },
+        // { url: `${akashStudyImage}`, alt: 'whileStudying' },
+        // {
+        //     url: 'https://img.freepik.com/free-photo/rear-view-programmer-working-all-night-long_1098-18697.jpg',
+        //     alt: 'Night programming'
+        // },
+        // {
+        //     url: 'https://img.freepik.com/free-vector/code-typing-concept-illustration_114360-3866.jpg',
+        //     alt: 'Code typing'
+        // },
+
     ];
 
     const settings = {

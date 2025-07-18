@@ -9,7 +9,10 @@ import {
   User,
   Code2,
   FolderGit2,
-  Mail
+  Mail,
+  Images,
+  User2,
+  Star
 } from 'lucide-react';
 
 const Navbar = ({ darkMode, toggleDarkMode }) => {
@@ -29,7 +32,9 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     { id: 'about', label: 'About', icon: User },
     { id: 'skills', label: 'Skills', icon: Code2 },
     { id: 'projects', label: 'Projects', icon: FolderGit2 },
-    { id: 'contact', label: 'Contact', icon: Mail }
+    { id: 'gallery', label: 'Gallery', icon: Images },
+    { id: 'contact', label: 'Contact', icon: Mail },
+    { id: 'ratingandfeedback', label: 'Rate Us', icon: Star }
   ];
 
   return (

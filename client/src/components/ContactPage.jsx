@@ -4,6 +4,8 @@ import checkBtn from '../assets/checkBtn.png'
 import { useFormik } from 'formik';
 import { formValidationSchema } from '../Schemas/validation'
 import axios from 'axios'
+import RatingAndFeedback from '../components/RatingAndFeedback.jsx'
+
 
 const initialValues = {
   username: "",
@@ -16,9 +18,11 @@ function Contact() {
   const [submitError, setSubmitError] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false) // New state for tracking submission
 
+   const API_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
   // Remove global axios default and use instance instead
   const apiClient = axios.create({
-    baseURL: 'https://portfolio-xe40.onrender.com',
+    baseURL: API_BASE_URL,
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json'
@@ -66,6 +70,7 @@ function Contact() {
     }, [])
 
     return (
+      // modal for greating after successful message sent
       <div className='fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center bg-indigo-700 z-[50]'>
         <div className='md:mt-10 flex flex-col gap-2 items-center text-slate-800 shadow-4xl bg-neutral-50 w-[95%] md:w-[33vw] md:h-[55vh] mx-h-[40vh] rounded-md'>
           <div className='flex flex-col items-center justify-between gap-4 px-4 py-2 '>
@@ -88,9 +93,10 @@ function Contact() {
 
   return (
     <>
+
       <section id="contact" className="min-h-screen flex items-center justify-center">
         <div className="py-8 lg:py-10 px-4 mx-auto max-w-screen-md md:w-[50%] ">
-          <h2 className="mb-3 text-3xl md:text-4xl text-center py-3 tracking-tight font-bold">Contact me</h2>
+          <h2 className="mb-3 text-3xl md:text-5xl text-center py-3 tracking-tight font-bold">Contact me</h2>
           <p className='mb-3 italic '>Feel free to contact me with any questions.</p>
           {submitError && (
             <div className="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
@@ -159,6 +165,11 @@ function Contact() {
 
         {showModal && <PopupModal />}
       </section>
+
+      {/* <div className='w-full md:ml-5' >
+        <RatingAndFeedback/>
+      </div> */}
+
     </>
   )
 }

@@ -8,6 +8,8 @@ import SkillsPage from './components/SkillsPage';
 import ContactPage from './components/ContactPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Gallery from './components/Gallery';
+import RatingAndFeedback from './components/RatingAndFeedback'
 
 const App = () => {
   // Initialize darkMode from localStorage or default to true
@@ -38,7 +40,7 @@ const App = () => {
       setShowScrollButton(window.scrollY > 400);
 
       // Update active section based on scroll position
-      const sections = ['portfolio/home', 'portfolio/about', 'portfolio/skills', 'portfolio/projects', 'portfolio/contact'];
+      const sections = ['portfolio/home', 'portfolio/about', 'portfolio/skills', 'portfolio/projects', 'portfolio/gallery', 'portfolio/contact', 'portfolio/ratingandfeedback'];
       const sectionElements = sections.map(section =>
         document.getElementById(section)
       );
@@ -116,8 +118,14 @@ const App = () => {
           <section id="portfolio/projects">
             <ProjectPage />
           </section>
+          <section id="portfolio/gallery">
+            <Gallery />
+          </section>
           <section id="portfolio/contact">
             <ContactPage />
+          </section>
+          <section id="portfolio/ratingandfeedback">
+            <RatingAndFeedback />
           </section>
         </main>
         <Footer />
@@ -126,7 +134,7 @@ const App = () => {
           onClick={scrollToTop}
           className={`
             fixed bottom-8 right-8 
-            w-12 h-12 
+            w-12 h-12
             flex items-center justify-center 
             rounded-full shadow-lg
             transition-all duration-300
@@ -135,7 +143,7 @@ const App = () => {
             dark:bg-white dark:text-blue-600
             bg-blue-600 text-slate-50
             hover:scale-110 active:scale-95
-            z-50
+            z-20
           `}
           aria-label="Scroll to top"
         >

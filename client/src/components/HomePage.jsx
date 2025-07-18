@@ -4,6 +4,7 @@ import ImageSlider from './ImageSlider';
 import MyResume from '../assets/updated_resume.pdf'
 import { FaArrowAltCircleDown } from "react-icons/fa";
 import Socialmedia from './Socialmedia'
+import Gallery from './Gallery';
 
 
 let model = 'https://img.freepik.com/free-photo/full-shot-man-suit-working-stairs_23-2148230807.jpg?ga=GA1.1.919035732.1724917926&semt=ais_hybrid';
@@ -23,7 +24,7 @@ function Home() {
 
   return (
     <>
-      <section id='home' className="min-h-screen flex items-center justify-center py-5 ">
+      <section id='home' className="min-h-screen flex flex-col items-center justify-center py-5 ">
         <div className='w-[97vw] md:h-screen flex md:flex-row justify-center flex-col-reverse gap-1 p-2'>
 
           {/* lefside section of Home page */}
@@ -55,6 +56,7 @@ function Home() {
             {/* slider components */}
             <ImageSlider />
           </div>
+
         </div>
 
       </section>
