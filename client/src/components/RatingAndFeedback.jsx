@@ -149,7 +149,7 @@ export default function PortfolioRating() {
         };
 
         // Debug: Log the formatted review
-        console.log("Formatted review for display:", newReviewForDisplay);
+        // console.log("Formatted review for display:", newReviewForDisplay);
 
         // Fix: Ensure reviews is always an array before spreading
         const currentReviews = Array.isArray(reviews) ? reviews : [];
@@ -168,7 +168,8 @@ export default function PortfolioRating() {
         }, 3000);
       } catch (err) {
         setError('Failed to submit review. Please try again.');
-        console.error('Error submitting review:', err);
+        console.error('Error submitting review:', err.message);
+        return
       } finally {
         setSubmitting(false);
       }
