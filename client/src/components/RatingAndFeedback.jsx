@@ -123,6 +123,7 @@ export default function PortfolioRating() {
           comment: comment.trim(),
         };
 
+        //posting the rating and feedback deatils to the backend
         const response = await fetch(`${API_BASE_URL}/ratingandfeedback`, {
           method: 'POST',
           headers: {
