@@ -14,7 +14,6 @@ app.use(cors({
 
     const allowedOrigins = [
       'http://localhost:5173',
-      'http://localhost:3000',
       'https://akashpawar07.github.io',
       'https://akashpawar07.github.io/portfolio',
       'https://akashpawar07.github.io/portfolio/',
@@ -121,7 +120,7 @@ app.post("/ratingandfeedback", async (req, res) => {
 
 
   } catch (error) {
-    
+
     console.error('Error saving rating and feedback details:', error);
 
     res.status(500).json({
