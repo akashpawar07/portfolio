@@ -53,11 +53,12 @@ app.use((req, res, next) => {
 // Database connection
 const db_connection = require('./db/databse.js');
 const contactModels = require('./models/contactModel.js');
+const ratingAndFeedbackModel = require('./models/ratingAndFeedbackModel.js')
 
 // Contact endpoint with improved error handling
 app.post('/contact', async (req, res) => {
   try {
-    console.log("Received contact form data:", req.body);
+    // console.log("Received contact form data:", req.body);
 
     // Validate input
     const { username, useremail, usermessage } = req.body;
@@ -92,6 +93,72 @@ app.post('/contact', async (req, res) => {
     });
   }
 });
+
+app.post("/ratingandfeedback", async (req, res) => {
+  try {
+    // Validate input
+    const { name, rating, comment } = req.body;
+
+    if (!name || !rating || !comment) {
+      return res.status(500).json({
+        success: false,
+        message: "All fields are manadatory"
+      })
+    }
+
+    const inputData = new ratingAndFeedbackModel({
+      name: name,
+      rating: rating,
+      comment: comment,
+    })
+
+    const data = await inputData.save()
+    res.status(200).json({
+      success: true,
+      message: 'Ratingandfeedback data saved successfully',
+      data: data
+    });
+
+
+  } catch (error) {
+    
+    console.error('Error saving rating and feedback details:', error);
+
+    res.status(500).json({
+      success: false,
+      message: 'Error saving ratingandfeedback details',
+      error: error.message
+    });
+  }
+
+})
+
+app.get("/ratingandfeedback", async (req, res) => {
+  try {
+    // fetching data from database
+    const data = await ratingAndFeedbackModel.find();
+
+    if (!data || data.length === 0) {
+      console.log("Server says data not found...");
+      return res.status(404).json({
+        success: false,
+        message: "Data not found."
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Server says data fetch Successfully.",
+      data : data
+    });
+
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ success: false, message: "Internal Server Error." });
+  }
+});
+
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
