@@ -289,7 +289,7 @@ const Gallery = () => {
                                 {/* Column Toggle for Grid View (Only visible on small devices when grid is active) */}
                                 {viewMode === 'grid' && (
                                     <div className="flex sm:hidden justify-center items-center gap-2 mb-4 px-4">
-                                        <span className="text-white text-xl font-medium flex items-center gap-2 py-2 ">
+                                        <span className="dark:text-slate-100 text-gray-900 text-[16px] font-medium flex items-center gap-2 py-2 ">
                                          View In : 
                                         </span>
 
@@ -482,9 +482,7 @@ const Gallery = () => {
                                             <span className="px-2 py-1 bg-purple-500/20 backdrop-blur-sm text-purple-300 rounded-full text-xs border border-purple-400/20">
                                                 {currentIndex + 1} / {galleryItems.length}
                                             </span>
-                                            <span className="px-2 py-1 bg-blue-500/20 backdrop-blur-sm text-blue-300 rounded-full text-xs border border-blue-400/20">
-                                                Swipe to explore
-                                            </span>
+                                
                                         </div>
                                     </div>
                                 </div>
