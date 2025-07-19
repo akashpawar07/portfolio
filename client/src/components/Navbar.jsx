@@ -43,7 +43,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   return (
     <>
       {/* Mobile Navbar */}
-      <nav className={`md:hidden fixed w-full top-0 z-50 ${darkMode ? 'bg-gradient-to-l from-gray-700 to-gray-950 text-white' : 'bg-gradient-to-l from-gray-100 to-gray-300 text-gray-800'
+      <nav className={`md:hidden fixed w-full top-0 z-50 ${darkMode ? 'bg-gradient-to-r from-gray-700 to-gray-950 text-white' : 'bg-gradient-to-r from-gray-100 to-gray-300 text-gray-800'
         } shadow-md`}>
         <div className="px-2">
           <div className="flex justify-between items-center h-20">

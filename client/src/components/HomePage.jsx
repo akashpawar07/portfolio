@@ -1,6 +1,6 @@
 import React, { createElement, useState } from 'react'
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
-import ImageSlider from './ImageSlider';
+import Image_Container from './ImageContainerHomePage';
 import MyResume from '../assets/updated_resume.pdf'
 import { FaArrowAltCircleDown } from "react-icons/fa";
 import Socialmedia from './Socialmedia'
@@ -24,7 +24,7 @@ function Home() {
 
   return (
     <>
-      <section id='home' className="min-h-screen flex flex-col items-center justify-center py-5 ">
+      <section id='home' className="min-h-screen flex flex-col items-center justify-center lg:mt-[-3rem] mt-[32px] ">
         <div className='w-[97vw] md:h-screen flex md:flex-row justify-center flex-col-reverse gap-1 p-2'>
 
           {/* lefside section of Home page */}
@@ -54,7 +54,7 @@ function Home() {
           {/* home page Image slider section */}
           <div className=' md:w-[50%] md:h-[99%] md:p-4 md:mt-[40px] '>
             {/* slider components */}
-            <ImageSlider />
+            <Image_Container />
           </div>
 
         </div>
