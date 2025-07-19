@@ -12,8 +12,11 @@ import {
   Mail,
   Images,
   User2,
-  Star
+  Star,
+  X
 } from 'lucide-react';
+
+import mainLogo from '../assets/logo/logo3.png'
 
 const Navbar = ({ darkMode, toggleDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,68 +43,143 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   return (
     <>
       {/* Mobile Navbar */}
-      <nav className={`md:hidden fixed w-full top-0 z-50 ${darkMode ? 'bg-gradient-to-l from-gray-700 to-gray-950 text-white' : 'bg-gradient-to-l  from-gray-100 to-gray-300 text-gray-800'
+      <nav className={`md:hidden fixed w-full top-0 z-50 ${darkMode ? 'bg-gradient-to-l from-gray-700 to-gray-950 text-white' : 'bg-gradient-to-l from-gray-100 to-gray-300 text-gray-800'
         } shadow-md`}>
-        <div className="px-4">
-          <div className="flex justify-between items-center h-16">
+        <div className="px-2">
+          <div className="flex justify-between items-center h-20">
             <div className="flex-shrink-0">
-              <button onClick={() => scrollToSection('portfolio/home')} className="font-bold text-xl">
-                Portfolio
+              <button onClick={() => scrollToSection('portfolio/home')} className="flex items-center gap-3">
+                <img
+                  src={mainLogo}
+                  alt="Portfolio Logo"
+                  className="h-[100px] object-contain"
+                />
               </button>
             </div>
 
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 relative z-[60]"
             >
-              <Menu size={24} />
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
+        </div>
 
-          {isMenuOpen && (
-            <div className="pb-4">
-              <div className="flex flex-col space-y-2">
-                {navItems.map((item) => (
-                  <NavItem
-                    key={item.id}
+        {/* Full Screen Mobile Dropdown */}
+        <div className={`
+          fixed inset-0 top-20 z-[55] transition-all duration-300 ease-in-out
+          ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
+          ${darkMode ? 'bg-gradient-to-b from-gray-800 to-gray-900' : 'bg-gradient-to-b from-gray-50 to-gray-100'}
+        `}>
+          <div className="pt-6 px-6">
+            <div className="w-full max-w-sm mx-auto space-y-3">
+              {navItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className={`transform transition-all duration-300 ease-in-out ${
+                    isMenuOpen 
+                      ? 'translate-y-0 opacity-100' 
+                      : '-translate-y-4 opacity-0'
+                  }`}
+                  style={{ transitionDelay: isMenuOpen ? `${index * 80}ms` : '0ms' }}
+                >
+                  <button
                     onClick={() => scrollToSection(`portfolio/${item.id}`)}
-                    mobile
+                    className={`
+                      w-full group flex items-center gap-3 px-4 py-2.5 rounded-lg
+                      transition-all duration-200 ease-in-out
+                      hover:scale-[1.02] active:scale-[0.98]
+                      ${darkMode 
+                        ? 'hover:bg-gray-700/50 hover:shadow-lg hover:shadow-gray-900/20' 
+                        : 'hover:bg-white/60 hover:shadow-lg hover:shadow-gray-400/20'
+                      }
+                      border border-transparent hover:border-gray-400/20
+                    `}
                   >
-                    <div className="flex items-center gap-3">
-                      <item.icon size={20} />
-                      {item.label}
+                    <div className={`
+                      flex items-center justify-center w-8 h-8 rounded-lg
+                      transition-all duration-200
+                      ${darkMode 
+                        ? 'bg-gray-700/50 group-hover:bg-gray-600/70' 
+                        : 'bg-gray-200/70 group-hover:bg-gray-300/80'
+                      }
+                    `}>
+                      <item.icon size={16} className="transition-transform duration-200 group-hover:scale-110" />
                     </div>
-                  </NavItem>
-                ))}
+                    <span className="font-medium text-sm tracking-wide">{item.label}</span>
+                  </button>
+                </div>
+              ))}
+              
+              {/* Divider */}
+              <div className={`h-px my-6 ${darkMode ? 'bg-gray-600' : 'bg-gray-300'}`}></div>
+              
+              <div
+                className={`transform transition-all duration-300 ease-in-out ${
+                  isMenuOpen 
+                    ? 'translate-y-0 opacity-100' 
+                    : '-translate-y-4 opacity-0'
+                }`}
+                style={{ transitionDelay: isMenuOpen ? `${navItems.length * 80}ms` : '0ms' }}
+              >
                 <button
                   onClick={toggleDarkMode}
-                  className="flex items-center space-x-2 px-3 py-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 w-full text-left"
+                  className={`
+                    w-full group flex items-center gap-3 px-4 py-2.5 rounded-lg
+                    transition-all duration-200 ease-in-out
+                    hover:scale-[1.02] active:scale-[0.98]
+                    ${darkMode 
+                      ? 'hover:bg-gray-700/50 hover:shadow-lg hover:shadow-gray-900/20' 
+                      : 'hover:bg-white/60 hover:shadow-lg hover:shadow-gray-400/20'
+                    }
+                    border border-transparent hover:border-gray-400/20
+                  `}
                 >
-                  {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                  <span>Change Theme</span>
+                  <div className={`
+                    flex items-center justify-center w-8 h-8 rounded-lg
+                    transition-all duration-200
+                    ${darkMode 
+                      ? 'bg-gray-700/50 group-hover:bg-gray-600/70' 
+                      : 'bg-gray-200/70 group-hover:bg-gray-300/80'
+                    }
+                  `}>
+                    {darkMode ? (
+                      <Sun size={16} className="transition-transform duration-200 group-hover:scale-110" />
+                    ) : (
+                      <Moon size={16} className="transition-transform duration-200 group-hover:scale-110" />
+                    )}
+                  </div>
+                  <span className="font-medium text-sm tracking-wide">
+                    {darkMode ? 'Light Mode' : 'Dark Mode'}
+                  </span>
                 </button>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </nav>
 
       {/* Desktop Sidebar */}
       <nav
-        className={`hidden md:block fixed left-0 top-0 h-screen z-50 transition-all duration-300 ${darkMode ? 'bg-gradient-to-t from-gray-700 to-gray-950 text-white' : 'bg-gradient-to-t  from-gray-200 to-gray-400 text-gray-800'
+        className={`hidden md:block fixed left-0 top-0 h-screen z-50 transition-all duration-300 ${darkMode ? 'bg-gradient-to-t from-gray-700 to-gray-950 text-white' : 'bg-gradient-to-t from-gray-200 to-gray-400 text-gray-800'
           } shadow-md ${isExpanded ? 'w-64' : 'w-16'}`}
       >
-        <div className="flex flex-col h-full relative">
+        <div className="flex flex-col h-full relative ">
           {/* Header with Toggle Button */}
-          <div className={`flex items-center h-16 ${isExpanded ? 'justify-between px-4' : 'justify-center px-2'}`}>
+          <div className={`flex items-center justify-between h-16 border-b border-b-gray-800 ${isExpanded ? 'justify-between px-4' : 'justify-center px-2'}`}>
             {isExpanded && (
-              <button onClick={() => scrollToSection('portfolio/home')} className="font-bold text-xl">
-                Portfolio
+              <button onClick={() => scrollToSection('portfolio/home')}>
+                <img
+                  src={mainLogo}
+                  alt="Portfolio Logo"
+                  className="h-[90px] object-contain ml-[-15px]"
+                />
               </button>
             )}
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-2 rounded-lg hover:bg-gray-200 dark:bg-gray-700"
+              className="p-2 rounded-lg ml-1 hover:bg-gray-200 dark:bg-gray-700"
               title={isExpanded ? "Collapse" : "Expand"}
             >
               {isExpanded ? <ChevronLeft size={20} /> : <Menu size={20} />}
