@@ -93,67 +93,83 @@ app.post('/contact', async (req, res) => {
   }
 });
 
+// POST route for creating rating and feedback
 app.post("/ratingandfeedback", async (req, res) => {
   try {
     // Validate input
     const { name, rating, comment } = req.body;
 
     if (!name || !rating || !comment) {
-      return res.status(500).json({
+      return res.status(400).json({
         success: false,
-        message: "All fields are manadatory"
-      })
+        message: "All fields are mandatory"
+      });
     }
 
-    const inputData = new ratingAndFeedbackModel({
-      name: name,
-      rating: rating,
-      comment: comment,
-    })
+    // Validate rating range
+    if (rating < 1 || rating > 5) {
+      return res.status(400).json({
+        success: false,
+        message: "Rating must be between 1 and 5"
+      });
+    }
 
-    const data = await inputData.save()
-    res.status(200).json({
+    // Create new rating and feedback document
+    const inputData = new ratingAndFeedbackModel({
+      name,
+      rating,
+      comment
+    });
+
+    const data = await inputData.save();
+
+    res.status(201).json({
       success: true,
-      message: 'Ratingandfeedback data saved successfully',
+      message: 'Rating and feedback saved successfully',
       data: data
     });
 
-
   } catch (error) {
-
     console.error('Error saving rating and feedback details:', error);
 
     res.status(500).json({
       success: false,
-      message: 'Error saving ratingandfeedback details',
+      message: 'Error saving rating and feedback details',
       error: error.message
     });
   }
+});
 
-})
-
+// GET route for fetching all rating and feedback
 app.get("/ratingandfeedback", async (req, res) => {
   try {
-    // fetching data from database
+    // Fetch data from database
     const data = await ratingAndFeedbackModel.find();
+    console.log("Fetched data:", data);
 
     if (!data || data.length === 0) {
-      console.log("Server says data not found...");
+      console.log("No rating and feedback data found");
       return res.status(404).json({
         success: false,
-        message: "Data not found."
+        message: "No rating and feedback data found"
       });
     }
 
     res.status(200).json({
       success: true,
-      message: "Server says data fetch Successfully.",
-      data : data
+      message: "Rating and feedback data fetched successfully",
+      count: data.length,
+      data: data
     });
 
   } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ success: false, message: "Internal Server Error." });
+    console.error('Error fetching rating and feedback data:', error);
+
+    res.status(500).json({
+      success: false,
+      message: "Error fetching rating and feedback data",
+      error: error.message
+    });
   }
 });
 
