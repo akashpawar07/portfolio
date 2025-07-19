@@ -24,7 +24,7 @@ const Gallery = () => {
     const autoScrollTimerRef = useRef(null);
     const imageContainerRef = useRef(null);
 
-    // Sample images for demo (replace with your actual images)
+    // images for gallery
     const galleryItems = [
         {
             id: 1,
@@ -301,7 +301,7 @@ const Gallery = () => {
                                                 : 'bg-gray-500 text-white hover:bg-gray-300'
                                                 }`}
                                         >
-                                            <Grid3x3 className="w-3 h-3" />
+                                            <Grid2x2 className="w-3 h-3" />
                                             <span>3</span>
                                         </button>
                                         <button
@@ -311,7 +311,7 @@ const Gallery = () => {
                                                 : 'bg-gray-500 text-white hover:bg-gray-300'
                                                 }`}
                                         >
-                                            <Grid2x2 className="w-3 h-3" />
+                                            <Grid3x3 className="w-3 h-3" />
                                             <span>4</span>
                                         </button>
                                     </div>

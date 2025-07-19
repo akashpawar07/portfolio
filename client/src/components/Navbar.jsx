@@ -167,19 +167,19 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
       >
         <div className="flex flex-col h-full relative ">
           {/* Header with Toggle Button */}
-          <div className={`flex items-center justify-between h-16 border-b border-b-gray-800 ${isExpanded ? 'justify-between px-4' : 'justify-center px-2'}`}>
+          <div className={`flex items-center justify-between h-16 border-b border-b-gray-800 bg-slate-900 ${isExpanded ? 'justify-between px-4' : 'justify-center px-2'}`}>
             {isExpanded && (
               <button onClick={() => scrollToSection('portfolio/home')}>
                 <img
                   src={mainLogo}
                   alt="Portfolio Logo"
-                  className="h-[90px] object-contain ml-[-15px]"
+                  className="h-[120px] object-contain ml-[-2rem]"
                 />
               </button>
             )}
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-2 rounded-lg ml-1 hover:bg-gray-200 dark:bg-gray-700"
+              className="p-2 rounded-lg ml-1 hover:bg-gray-200 bg-gray-400 dark:bg-gray-700"
               title={isExpanded ? "Collapse" : "Expand"}
             >
               {isExpanded ? <ChevronLeft size={20} /> : <Menu size={20} />}
