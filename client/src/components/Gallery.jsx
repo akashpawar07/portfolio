@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, ChevronLeft, ChevronRight, ZoomIn, Download, Grid, List } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ZoomIn, Download, GalleryHorizontal, LayoutGrid, Grid3x3, Grid2x2, List } from 'lucide-react';
 
 import mineImage from '../assets/gang.jpg'
 import minePicture from '../assets/me img.jpg'
@@ -20,6 +20,7 @@ const Gallery = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [viewMode, setViewMode] = useState('scroll'); // 'scroll' or 'grid'
+    const [gridColumns, setGridColumns] = useState(4); // 3 or 4 columns for small devices
     const autoScrollTimerRef = useRef(null);
     const imageContainerRef = useRef(null);
 
@@ -28,9 +29,9 @@ const Gallery = () => {
         {
             id: 1,
             src: myCollegeLastDayphoto,
-            title: 'Group Image',
+            title: 'Me - collegeLastDayPicture',
             category: 'nature',
-            description: 'Beautiful mountain landscape during sunrise'
+            description: 'Closing chapters with knowledge in hand 📚'
         },
         {
             id: 2,
@@ -110,6 +111,7 @@ const Gallery = () => {
             description: 'Crystal clear mountain lake'
         },
     ]
+
     // Download function
     const downloadImage = (imageSrc, imageName) => {
         const link = document.createElement('a');
@@ -226,6 +228,15 @@ const Gallery = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [selectedImage, currentIndex, filteredItems.length]);
 
+    // Get grid classes based on column selection
+    const getGridClasses = () => {
+        if (gridColumns === 3) {
+            return 'grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5';
+        } else {
+            return 'grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5';
+        }
+    };
+
     if (isLoading) {
         return (
             <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
@@ -239,51 +250,82 @@ const Gallery = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-br bg-transparent md:w-[98%] md:ml-12 flex justify-center items-center bg-orange-700">
-                <div className={`transition-all duration-500 ${selectedImage ? 'blur-sm' : ''}`}>
-                    <div className="py-12 px-4">
-                        <div className="max-w-7xl mx-auto">
-                            <div className="text-center mb-16">
-                                <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <div className="min-h-screen bg-gradient-to-br bg-transparent flex justify-center items-center w-[95%] ml-[2.5%] lg:w-[98%] lg:ml-[1%]">
+                <div className={`transition-all duration-500 w-full ${selectedImage ? 'blur-sm' : ''}`}>
+                    <div className="py-6 sm:py-12 px-2 sm:px-4">
+                        <div className="w-full max-w-full">
+                            <div className="text-center mb-8 sm:mb-16 px-2">
+                                <h1 className="text-2xl sm:text-3xl md:text-5xl text-gray-900 mb-4 sm:mb-6 font-extrabold bg-gradient-to-tr from-green-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                                     Photo Gallery
                                 </h1>
-                                <p className="text-xl italic text-gray-300 max-w-2xl mx-auto mb-8">
+                                <p className="text-lg sm:text-xl pl-4 sm:pl-8 italic dark:text-white/100 text-gray-900 mx-auto mb-6 sm:mb-8 max-w-[90%] sm:max-w-2/3">
                                     A photo album of my college journey, filled with memories that I'll cherish forever
                                 </p>
 
-                                {/* View Mode Toggle */}
-                                <div className="flex justify-center gap-4 mb-8">
+                                {/* View Mode Toggle - Responsive */}
+                                <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 mb-6 sm:mb-8 px-4">
                                     <button
                                         onClick={() => setViewMode('scroll')}
-                                        className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 ${viewMode === 'scroll'
-                                                ? 'bg-blue-500 text-white shadow-lg shadow-purple-500/25'
-                                                : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                                        className={`flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-300 w-full sm:w-auto text-xs sm:text-base ${viewMode === 'scroll'
+                                            ? 'bg-blue-500 text-white shadow-lg shadow-purple-500/25'
+                                            : 'bg-gray-500 text-white hover:bg-white/20'
                                             }`}
                                     >
-                                        <List className="w-5 h-5" />
-                                        Scroll View
+                                        <GalleryHorizontal className="w-3 h-3 sm:w-5 sm:h-5 flex-shrink-0" />
+                                        <span className="truncate">Scroll View</span>
                                     </button>
                                     <button
                                         onClick={() => setViewMode('grid')}
-                                        className={`flex items-center gap-2 px-6 py-3 rounded-full transition-all duration-300 ${viewMode === 'grid'
-                                                ? 'bg-blue-500 text-white shadow-lg shadow-purple-500/25'
-                                                : 'bg-white/10 text-gray-300 hover:bg-white/20'
+                                        className={`flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-lg transition-all duration-300 w-full sm:w-auto text-xs sm:text-base ${viewMode === 'grid'
+                                            ? 'bg-blue-500 text-white shadow-lg shadow-purple-500/25'
+                                            : 'bg-gray-500 text-white hover:bg-white/20'
                                             }`}
                                     >
-                                        <Grid className="w-5 h-5" />
-                                        View All Photos
+                                        <LayoutGrid className="w-3 h-3 sm:w-5 sm:h-5 flex-shrink-0" />
+                                        <span className="truncate">All Photos</span>
                                     </button>
                                 </div>
+
+                                {/* Column Toggle for Grid View (Only visible on small devices when grid is active) */}
+                                {viewMode === 'grid' && (
+                                    <div className="flex sm:hidden justify-center items-center gap-2 mb-4 px-4">
+                                        <span className="text-white text-xl font-medium flex items-center gap-2 py-2 ">
+                                         View In : 
+                                        </span>
+
+
+                                        <button
+                                            onClick={() => setGridColumns(3)}
+                                            className={`flex items-center justify-center gap-1 px-3 py-2 rounded-lg transition-all duration-300 text-xs ${gridColumns === 3
+                                                ? 'bg-blue-500 text-white shadow-lg shadow-purple-500/25'
+                                                : 'bg-gray-500 text-white hover:bg-gray-300'
+                                                }`}
+                                        >
+                                            <Grid3x3 className="w-3 h-3" />
+                                            <span>3</span>
+                                        </button>
+                                        <button
+                                            onClick={() => setGridColumns(4)}
+                                            className={`flex items-center justify-center gap-1 px-3 py-2 rounded-lg transition-all duration-300 text-xs ${gridColumns === 4
+                                                ? 'bg-blue-500 text-white shadow-lg shadow-purple-500/25'
+                                                : 'bg-gray-500 text-white hover:bg-gray-300'
+                                                }`}
+                                        >
+                                            <Grid2x2 className="w-3 h-3" />
+                                            <span>4</span>
+                                        </button>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Scroll View */}
                             {viewMode === 'scroll' && (
                                 <div className="relative">
-                                    <div className="scroll-container flex gap-6 overflow-x-auto scrollbar-hide pb-4" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                                    <div className="scroll-container flex gap-3 sm:gap-6 overflow-x-auto scrollbar-hide pb-4">
                                         {filteredItems.map((item, index) => (
                                             <div
                                                 key={`original-${item.id}`}
-                                                className="group relative flex-shrink-0 w-80 h-96 overflow-hidden bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 cursor-pointer"
+                                                className="group relative flex-shrink-0 overflow-hidden bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 cursor-pointer w-64 h-80 sm:w-80 sm:h-96"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     openModal(item, index);
@@ -296,13 +338,13 @@ const Gallery = () => {
                                                 />
 
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                                                        <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
+                                                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                                                        <h3 className="text-white font-semibold text-base sm:text-lg mb-2">{item.title}</h3>
                                                         <p className="text-gray-300 text-sm">{item.description}</p>
                                                     </div>
 
                                                     <div className="absolute top-4 right-4">
-                                                        <ZoomIn className="w-8 h-8 text-white opacity-80" />
+                                                        <ZoomIn className="w-6 h-6 sm:w-8 sm:h-8 text-white opacity-80" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -311,7 +353,7 @@ const Gallery = () => {
                                         {filteredItems.map((item, index) => (
                                             <div
                                                 key={`duplicate-${item.id}`}
-                                                className="group relative flex-shrink-0 w-80 h-96 overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 cursor-pointer"
+                                                className="group relative flex-shrink-0 overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 cursor-pointer w-64 h-80 sm:w-80 sm:h-96"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     openModal(item, index);
@@ -324,13 +366,13 @@ const Gallery = () => {
                                                 />
 
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                                                        <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
+                                                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                                                        <h3 className="text-white font-semibold text-base sm:text-lg mb-2">{item.title}</h3>
                                                         <p className="text-gray-300 text-sm">{item.description}</p>
                                                     </div>
 
                                                     <div className="absolute top-4 right-4">
-                                                        <ZoomIn className="w-8 h-8 text-white opacity-80" />
+                                                        <ZoomIn className="w-6 h-6 sm:w-8 sm:h-8 text-white opacity-80" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -349,11 +391,11 @@ const Gallery = () => {
 
                             {/* Grid View */}
                             {viewMode === 'grid' && (
-                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 sm:gap-2 auto-rows-[120px] sm:auto-rows-[140px] md:auto-rows-[160px] lg:auto-rows-[180px]">
+                                <div className={`grid ${getGridClasses()} gap-1 sm:gap-2 auto-rows-[120px]`}>
                                     {filteredItems.map((item, index) => (
                                         <div
                                             key={item.id}
-                                            className={`group relative overflow-hidden bg-white/5 backdrop-blur-sm border-0 hover:border-purple-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 cursor-pointer ${item.gridClass}`}
+                                            className="group relative overflow-hidden bg-white/5 backdrop-blur-sm border-0 hover:border-purple-400/50 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 cursor-pointer"
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 openModal(item, index);
@@ -422,12 +464,7 @@ const Gallery = () => {
                             {/* Scrollable Image Container */}
                             <div
                                 ref={imageContainerRef}
-                                className="flex flex-row h-full w-full overflow-x-auto overflow-y-hidden"
-                                style={{
-                                    scrollbarWidth: 'none',
-                                    msOverflowStyle: 'none',
-                                    WebkitOverflowScrolling: 'touch'
-                                }}
+                                className="flex flex-row h-full w-full overflow-x-auto overflow-y-hidden scrollbar-hide"
                             >
                                 {/* Image Container - Allow horizontal scrolling */}
                                 <div className="flex-shrink-0 min-w-full h-full flex items-center justify-start relative">
@@ -435,11 +472,6 @@ const Gallery = () => {
                                         src={selectedImage.src}
                                         alt={selectedImage.title}
                                         className="h-full w-auto object-contain min-w-full"
-                                        style={{
-                                            maxWidth: 'none',
-                                            minWidth: '100%',
-                                            width: 'auto'
-                                        }}
                                     />
 
                                     {/* Info Overlay - Bottom of image */}
@@ -460,7 +492,7 @@ const Gallery = () => {
                         </div>
 
                         {/* Desktop/Tablet Layout with Navigation (sm and above) */}
-                        <div className="hidden sm:flex relative w-full max-w-[100vw] max-h-[100vh] h-[100vh] backdrop-blur-xl border border-white/20 shadow-2xl overflow-hidden flex-col">
+                        <div className="hidden sm:flex relative w-full h-full max-w-full max-h-full backdrop-blur-xl border border-white/20 shadow-2xl overflow-hidden flex-col">
                             {/* Close Button */}
                             <button
                                 onClick={closeModal}
@@ -503,7 +535,7 @@ const Gallery = () => {
                                 </div>
 
                                 <div className="flex-shrink-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 border-t border-white/10">
-                                    <div className="max-w-4xl mx-auto">
+                                    <div className="mx-auto max-w-4xl">
                                         <h3 className="text-white text-xl font-bold mb-2">{selectedImage.title}</h3>
                                         <p className="text-gray-300 text-sm mb-4">{selectedImage.description}</p>
                                         <div className="flex items-center gap-4">
@@ -516,7 +548,7 @@ const Gallery = () => {
                             </div>
 
                             {/* Image Counter */}
-                            <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 text-white text-sm bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                            <div className="absolute left-1/2 -translate-x-1/2 bottom-[-3rem] text-white text-sm bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
                                 {currentIndex + 1} / {galleryItems.length}
                             </div>
                         </div>

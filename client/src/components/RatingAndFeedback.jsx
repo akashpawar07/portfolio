@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import { Star, User, MoreHorizontal, Edit3, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 
 export default function PortfolioRating() {
@@ -14,64 +15,42 @@ export default function PortfolioRating() {
   const [error, setError] = useState(null);
 
   const API_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
-  // const API_BASE_URL = 'https://portfolio-xe40.onrender.com';
+  // const API_BASE_URL = 'https://portfolio-xe40.onrender.com'
 
   const fetchReviews = async () => {
     try {
       setLoading(true);
-      setError(null);
+      const response = await axios.get(`${API_BASE_URL}/ratingandfeedback`);
+      console.log("fetching data from backend = ", response.data);
       
-      const response = await fetch(`${API_BASE_URL}/ratingandfeedback`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch reviews: ${response.status} ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      console.log("Fetched data from backend:", data);
-      
-      // Handle different response structures more robustly
+      // Fix: Handle different possible response structures
       let reviewsData = [];
-      if (Array.isArray(data)) {
-        reviewsData = data;
-      } else if (data && typeof data === 'object') {
-        // Try different possible property names
-        reviewsData = data.data || data.reviews || data.results || [];
+      if (response.data && Array.isArray(response.data)) {
+        reviewsData = response.data;
+      } else if (response.data && response.data.data && Array.isArray(response.data.data)) {
+        reviewsData = response.data.data;
+      } else if (response.data && response.data.reviews && Array.isArray(response.data.reviews)) {
+        reviewsData = response.data.reviews;
       }
-
-      // Validate that we have an array
-      if (!Array.isArray(reviewsData)) {
-        throw new Error('Invalid response format: expected array of reviews');
-      }
-
-      // Sort by most recent first (assuming createdAt or updatedAt exists)
-      const sortedReviews = reviewsData.sort((a, b) => {
-        const dateA = new Date(a.updatedAt || a.createdAt || 0);
-        const dateB = new Date(b.updatedAt || b.createdAt || 0);
-        return dateB - dateA;
-      });
-
-      setReviews(sortedReviews);
+      
+      setReviews([...reviewsData].reverse());
       setError(null);
     } catch (err) {
+      // setError('Failed to load reviews. Please try again later.');
       console.error('Error fetching reviews:', err);
-      setError(`Failed to load reviews: ${err.message}`);
-      setReviews([]); // Ensure reviews is always an array
+      // Fix: Ensure reviews is always an array even on error
+      setReviews([]);
     } finally {
       setLoading(false);
     }
   };
 
+  // Load reviews on component mount
   useEffect(() => {
     fetchReviews();
   }, []);
 
+  // Generate avatar initials from name
   const getInitials = (name) => {
     if (!name || typeof name !== 'string') return 'UN';
     return name.split(' ')
@@ -81,11 +60,18 @@ export default function PortfolioRating() {
       .slice(0, 2);
   };
 
+  // Generate avatar from name and use it as avatar field
+  const generateAvatar = (name) => {
+    return getInitials(name);
+  };
+
+  // Calculate average rating - Fix: Add safety check
   const averageRating = (reviews && reviews.length > 0)
-    ? reviews.reduce((sum, review) => sum + (Number(review.rating) || 0), 0) / reviews.length
+    ? reviews.reduce((sum, review) => sum + (review.rating || 0), 0) / reviews.length
     : 0;
   const totalReviews = reviews ? reviews.length : 0;
 
+  // Get rating feedback words and emoji based on rating
   const getRatingFeedback = (rating) => {
     const feedbackData = {
       1: {
@@ -123,83 +109,64 @@ export default function PortfolioRating() {
     setUserRating(value);
   };
 
+  // form submitting
   const handleSubmit = async () => {
-    // Validate input
-    if (!userRating || userRating < 1 || userRating > 5) {
-      setError('Please select a rating between 1 and 5 stars');
-      return;
-    }
 
-    if (!comment.trim()) {
-      setError('Please enter a comment');
-      return;
-    }
+    if (userRating > 0 && comment.trim() && userName.trim()) {
+      setSubmitting(true);
 
-    if (!userName.trim()) {
-      setError('Please enter your name');
-      return;
-    }
+      try {
 
-    setSubmitting(true);
-    setError(null);
+        const newReview = {
+          name: userName.trim(),
+          rating: userRating,
+          comment: comment.trim(),
+        };
 
-    try {
-      const newReview = {
-        name: userName.trim(),
-        rating: Number(userRating),
-        comment: comment.trim(),
-      };
+        // Posting the rating and feedback details to the backend using axios
+        const response = await axios.post(`${API_BASE_URL}/ratingandfeedback`, newReview, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
-      console.log('Submitting review:', newReview);
+        console.log("savedReview data", response.data);
 
-      const response = await fetch(`${API_BASE_URL}/ratingandfeedback`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(newReview),
-      });
+        // Create a properly structured review object for immediate display
+        const newReviewForDisplay = {
+          _id: response.data._id || response.data.id || Date.now(),
+          name: response.data.name || userName.trim(),
+          rating: response.data.rating || userRating,
+          comment: response.data.comment || comment.trim(),
+          createdAt: response.data.createdAt || new Date().toISOString(),
+          updatedAt: response.data.updatedAt || new Date().toISOString()
+        };
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(`Failed to submit review: ${response.status} ${response.statusText}. ${errorData}`);
+        // Debug: Log the formatted review
+        // console.log("Formatted review for display:", newReviewForDisplay);
+
+        // Fix: Ensure reviews is always an array before spreading
+        const currentReviews = Array.isArray(reviews) ? reviews : [];
+        setReviews([newReviewForDisplay, ...currentReviews]);
+        
+        setIsSubmitted(true);
+        setShowWriteReview(false);
+        setUserRating(0);
+        setComment('');
+        setUserName('');
+        setError(null);
+
+        // Reset success message after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 3000);
+      } catch (err) {
+        setError('Failed to submit review. Please try again.');
+        console.error('Error submitting review:', err.response?.data || err.message);
+        return
+      } finally {
+        setSubmitting(false);
       }
-
-      const savedReview = await response.json();
-      console.log("Saved review data:", savedReview);
-
-      // Create properly structured review for immediate display
-      const reviewForDisplay = {
-        _id: savedReview._id || savedReview.id || `temp-${Date.now()}`,
-        name: savedReview.name || userName.trim(),
-        rating: Number(savedReview.rating) || userRating,
-        comment: savedReview.comment || comment.trim(),
-        createdAt: savedReview.createdAt || new Date().toISOString(),
-        updatedAt: savedReview.updatedAt || new Date().toISOString()
-      };
-
-      // Add to reviews list (at the beginning for most recent)
-      setReviews(prevReviews => [reviewForDisplay, ...prevReviews]);
-      
-      // Reset form and show success
-      setIsSubmitted(true);
-      setShowWriteReview(false);
-      setUserRating(0);
-      setComment('');
-      setUserName('');
-      setError(null);
-
-      // Auto-hide success message after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 3000);
-
-    } catch (err) {
-      console.error('Error submitting review:', err);
-      setError(`Failed to submit review: ${err.message}`);
-    } finally {
-      setSubmitting(false);
     }
   };
 
@@ -216,13 +183,13 @@ export default function PortfolioRating() {
   };
 
   const renderStars = (rating, size = 'w-4 h-4') => {
-    const numRating = Number(rating) || 0;
     return (
       <div className="flex">
         {[1, 2, 3, 4, 5].map((star) => (
           <Star
             key={star}
-            className={`${size} ${star <= numRating ? 'text-yellow-400 fill-current' : 'text-slate-300'}`}
+            className={`${size} ${star <= rating ? 'text-yellow-400 fill-current' : 'text-slate-300'
+              }`}
           />
         ))}
       </div>
@@ -248,6 +215,7 @@ export default function PortfolioRating() {
     }
   };
 
+  // Format time using createdAt or updatedAt with more precise timing
   const formatTime = (createdAt, updatedAt) => {
     const dateToUse = updatedAt || createdAt;
     if (!dateToUse) return 'Recently';
@@ -255,14 +223,16 @@ export default function PortfolioRating() {
     try {
       const date = new Date(dateToUse);
       const now = new Date();
-      const diffTime = now - date;
+      const diffTime = now - date; // Get difference in milliseconds
 
+      // Convert to different time units
       const diffMinutes = Math.floor(diffTime / (1000 * 60));
       const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
       const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
       const diffWeeks = Math.floor(diffDays / 7);
       const diffMonths = Math.floor(diffDays / 30);
 
+      // Return appropriate time format
       if (diffMinutes < 1) return 'Just now';
       if (diffMinutes === 1) return '1 minute ago';
       if (diffMinutes < 60) return `${diffMinutes} minutes ago`;
@@ -285,7 +255,7 @@ export default function PortfolioRating() {
 
   if (loading) {
     return (
-      <div className="md:w-[95vw] md:h-[75vh] md:ml-16 p-4 sm:mx-2 md:p-6 bg-neutral-100 rounded-md shadow-lg">
+      <div className="md:w-[95vw] md:h-[75vh] md:ml-16 p-4 sm:mx-2 md:p-6  bg-neutral-100 rounded-md shadow-lg">
         <div className="flex items-center justify-center py-20">
           <div className="text-slate-600 text-3xl">Loading reviews...</div>
         </div>
@@ -294,17 +264,11 @@ export default function PortfolioRating() {
   }
 
   return (
-    <div className="md:w-[95vw] h-[99vh] md:ml-16 p-4 sm:mx-2 md:p-6 bg-neutral-200 rounded-md shadow-lg my-6">
+    <div className="md:w-[95vw] h-[99vh] md:ml-16 p-4 sm:mx-2 md:p-6  bg-neutral-200 rounded-md shadow-lg my-6">
       {/* Error Message */}
       {error && (
         <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
           {error}
-          <button 
-            onClick={() => setError(null)}
-            className="ml-2 text-red-700 hover:text-red-900 font-bold"
-          >
-            ×
-          </button>
         </div>
       )}
 
@@ -471,7 +435,7 @@ export default function PortfolioRating() {
           ) : (
             reviews.map((review, index) => (
               <div
-                key={review._id || review.id || index}
+                key={review._id || index}
                 className="flex-shrink-0 w-80 sm:w-96 p-4 bg-white border border-slate-200 rounded-lg shadow-md hover:shadow-lg transition-shadow"
               >
                 {/* Review Header */}
