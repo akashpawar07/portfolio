@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import svg from '../assets/logo/homePageSVG.svg';
+import svg from '../assets/logo/mainModel.png';
 
 const SvgHeroSection = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -9,7 +9,7 @@ const SvgHeroSection = () => {
     }, []);
 
     return (
-        <div className="relative flex items-center justify-center h-[45vh] md:h-[92vh] lg:h-[95vh] p-2">
+        <div className="relative flex items-center justify-center h-[50vh] md:h-[92vh] lg:h-[95vh] p-2">
             {/* Corner Accents - Alternating Pairs */}
             {/* Top Left */}
             <div className="absolute top-0 left-0 w-20 h-20 md:w-24 md:h-24">
@@ -46,7 +46,7 @@ const SvgHeroSection = () => {
                 <img
                     src={svg}
                     alt="Homepage SVG"
-                    className="w-96 h-96 md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] object-contain hover:scale-105 transition-all duration-500 ease-in-out hover:rotate-1 animate-bounce-slow rounded-tl-3xl rounded-br-3xl"
+                    className="w-96 h-96 md:w-[450px] md:h-[450px] lg:w-[530px] lg:h-[530px] object-contain hover:scale-105 transition-all duration-500 ease-in-out hover:rotate-1 animate-bounce-slow rounded-tl-3xl rounded-br-3xl"
                 />
             </div>
 

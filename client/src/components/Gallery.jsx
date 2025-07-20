@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Download, GalleryHorizontal, LayoutGrid, Grid3x3, Grid2x2, List } from 'lucide-react';
 
-import mineImage from '../assets/gang.jpg'
+import bachhaHostelBoys from '../assets/gang.jpg'
 import minePicture from '../assets/me img.jpg'
 import group2 from '../assets/group2.jpg'
 import group4 from '../assets/group4.jpg'
@@ -30,85 +30,85 @@ const Gallery = () => {
             id: 1,
             src: myCollegeLastDayphoto,
             title: 'Me - collegeLastDayPicture',
-            category: 'nature',
+            category: '',
             description: 'Closing chapters with knowledge in hand 📚'
         },
         {
             id: 2,
             src: meAdiSandip,
-            title: 'City Streets',
-            category: 'urban',
-            description: 'Busy city intersection at dusk'
+            title: 'TRIO',
+            category: '',
+            description: 'Good times + Crazy friends = Amazing memories.'
         },
         {
             id: 3,
             src: minePicture,
-            title: 'City Lights',
-            category: 'urban',
-            description: 'Stunning city skyline at night'
+            title: 'ME',
+            category: '',
+            description: ''
         },
         {
             id: 4,
-            src: mineImage,
-            title: 'Forest Path',
-            category: 'nature',
-            description: 'Peaceful walk through autumn forest'
+            src: bachhaHostelBoys,
+            title: 'Circle of Trust',
+            category: '',
+            description: 'Some friendships are timeless, just like these photos.'
         },
         {
             id: 5,
             src: gang2,
-            title: 'Ocean Waves',
-            category: 'nature',
-            description: 'Dramatic ocean waves hitting the shore'
+            title: 'Brothers',
+            category: '',
+            description: 'We came as strangers, leave as family.'
         },
         {
             id: 6,
             src: gang,
-            title: 'Street Photography',
-            category: 'urban',
-            description: 'Candid moment captured in the city'
+            title: 'Boys',
+            category: '',
+            description: 'Smilling together last time'
         },
         {
             id: 7,
             src: group2,
-            title: 'Desert Sunset',
-            category: 'nature',
-            description: 'Golden hour in the desert landscape'
+            title: 'Industrial Visit',
+            category: '',
+            description: 'Photo taken by Mr. Somnath during the industrial visit.'
         },
         {
             id: 8,
             src: lastDayOfCollege1,
-            title: 'Architecture',
-            category: 'urban',
-            description: 'Modern architectural details'
+            title: 'Last Day OF College',
+            category: '',
+            description: 'A thousand memories in one last walk through college.'
         },
         {
             id: 9,
             src: lastDayOfCollege2,
-            title: 'Winter Wonderland',
+            title: '#lastdayofcollegelife',
             category: 'nature',
-            description: 'Snow-covered mountain peaks'
+            description: 'Final frames of a beautiful journey.'
         },
         {
             id: 10,
             src: akkiPose,
-            title: 'Sunset Beach',
+            title: 'Akshay Kumar Pose',
             category: 'nature',
-            description: 'Golden sunset over the ocean'
+            description: 'Not just a pose, it s a tribute to the Khiladi himself'
         },
         {
             id: 11,
             src: groupPhotoWithGirls,
-            title: 'Urban Reflection',
+            title: 'Mates',
             category: 'urban',
-            description: 'City buildings reflected in water'
+            description: 'The last bell rang, but the memories will echo forever.'
         },
         {
             id: 12,
             src: group4,
-            title: 'Mountain Lake',
+            title: 'Internal Hackthon',
             category: 'nature',
-            description: 'Crystal clear mountain lake'
+            description: 'One frame from a day full of creativity, code, and collaboration.'
         },
     ]
 
@@ -121,71 +121,6 @@ const Gallery = () => {
         link.click();
         document.body.removeChild(link);
     };
-
-    // Auto-scroll functionality
-    useEffect(() => {
-        if (viewMode !== 'scroll') return;
-
-        const scrollContainer = document.querySelector('.scroll-container');
-        if (!scrollContainer) return;
-
-        const getScrollSpeed = () => {
-            const screenWidth = window.innerWidth;
-            if (screenWidth >= 1024) return 2;
-            if (screenWidth >= 768) return 1.5;
-            return 1;
-        };
-
-        const scrollInterval = 20;
-
-        const startAutoScroll = () => {
-            if (autoScrollTimerRef.current) {
-                clearInterval(autoScrollTimerRef.current);
-            }
-
-            autoScrollTimerRef.current = setInterval(() => {
-                const scrollSpeed = getScrollSpeed();
-                if (scrollContainer.scrollLeft >= scrollContainer.scrollWidth / 2) {
-                    scrollContainer.scrollLeft = 0;
-                } else {
-                    scrollContainer.scrollLeft += scrollSpeed;
-                }
-            }, scrollInterval);
-        };
-
-        const stopAutoScroll = () => {
-            if (autoScrollTimerRef.current) {
-                clearInterval(autoScrollTimerRef.current);
-                autoScrollTimerRef.current = null;
-            }
-        };
-
-        startAutoScroll();
-
-        scrollContainer.addEventListener('mouseenter', stopAutoScroll);
-        scrollContainer.addEventListener('mouseleave', startAutoScroll);
-        scrollContainer.addEventListener('touchstart', stopAutoScroll);
-        scrollContainer.addEventListener('touchend', () => {
-            setTimeout(startAutoScroll, 1000);
-        });
-
-        const handleResize = () => {
-            stopAutoScroll();
-            startAutoScroll();
-        };
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            stopAutoScroll();
-            if (scrollContainer) {
-                scrollContainer.removeEventListener('mouseenter', stopAutoScroll);
-                scrollContainer.removeEventListener('mouseleave', startAutoScroll);
-                scrollContainer.removeEventListener('touchstart', stopAutoScroll);
-                scrollContainer.removeEventListener('touchend', startAutoScroll);
-            }
-            window.removeEventListener('resize', handleResize);
-        };
-    }, [viewMode]);
 
     const filteredItems = galleryItems;
 
@@ -290,7 +225,7 @@ const Gallery = () => {
                                 {viewMode === 'grid' && (
                                     <div className="flex sm:hidden justify-center items-center gap-2 mb-4 px-4">
                                         <span className="dark:text-slate-100 text-gray-900 text-[16px] font-medium flex items-center gap-2 py-2 ">
-                                         View In : 
+                                            View In :
                                         </span>
 
 
@@ -382,7 +317,7 @@ const Gallery = () => {
                                     <div className="flex justify-center mt-4">
                                         <div className="text-gray-400 text-sm flex items-center gap-2">
                                             <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                                            Auto-scrolling photos • Click to view
+                                            Scroll photos • Click to view
                                             <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
                                         </div>
                                     </div>
@@ -482,7 +417,7 @@ const Gallery = () => {
                                             <span className="px-2 py-1 bg-purple-500/20 backdrop-blur-sm text-purple-300 rounded-full text-xs border border-purple-400/20">
                                                 {currentIndex + 1} / {galleryItems.length}
                                             </span>
-                                
+
                                         </div>
                                     </div>
                                 </div>
