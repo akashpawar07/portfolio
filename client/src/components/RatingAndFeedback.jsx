@@ -21,7 +21,7 @@ export default function PortfolioRating() {
     try {
       setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/ratingandfeedback`);
-      console.log("fetching data from backend = ", response.data);
+      // console.log("fetching data from backend = ", response.data);
       
       // Fix: Handle different possible response structures
       let reviewsData = [];
@@ -37,7 +37,7 @@ export default function PortfolioRating() {
       setError(null);
     } catch (err) {
       // setError('Failed to load reviews. Please try again later.');
-      console.error('Error fetching reviews:', err);
+      // console.error('Error fetching reviews:', err);
       // Fix: Ensure reviews is always an array even on error
       setReviews([]);
     } finally {
@@ -130,7 +130,7 @@ export default function PortfolioRating() {
           },
         });
 
-        console.log("savedReview data", response.data);
+        // console.log("savedReview data", response.data);
 
         // Create a properly structured review object for immediate display
         const newReviewForDisplay = {
@@ -162,7 +162,7 @@ export default function PortfolioRating() {
         }, 3000);
       } catch (err) {
         setError('Failed to submit review. Please try again.');
-        console.error('Error submitting review:', err.response?.data || err.message);
+        // console.error('Error submitting review:', err.response?.data || err.message);
         return
       } finally {
         setSubmitting(false);
