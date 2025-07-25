@@ -160,7 +160,7 @@ export default function PortfolioRating() {
         setTimeout(() => {
           setIsSubmitted(false);
         }, 3000);
-      } catch (err) {
+      } catch (err) {s
         setError('Failed to submit review. Please try again.');
         // console.error('Error submitting review:', err.response?.data || err.message);
         return

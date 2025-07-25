@@ -15,211 +15,266 @@ import github from '../assets/github.webp'
 import comuni from '../assets/camun.webp'
 import reactjs from '../assets/reactjs.jpg'
 
-
 export default function SkillsPage() {
+    const skills = [
+        {
+            title: "React.js",
+            image: reactjs,
+            description: "A powerful JavaScript library for building dynamic user interfaces with component-based architecture and virtual DOM optimization.",
+            level: "Advanced",
+            color: "from-blue-500 to-cyan-500"
+        },
+        {
+            title: "Java",
+            image: Java,
+            description: "Platform-independent programming language with strong OOP principles. Write Once, Run Anywhere (WORA) capability.",
+            level: "Intermediate",
+            color: "from-orange-500 to-red-500"
+        },
+        {
+            title: "JavaScript",
+            image: Js,
+            description: "Versatile programming language for client-side, server-side, mobile, and desktop application development.",
+            level: "Advanced",
+            color: "from-yellow-400 to-orange-500"
+        },
+        {
+            title: "OOP Concepts",
+            image: Oops,
+            description: "Object-oriented programming principles including encapsulation, inheritance, polymorphism for scalable software design.",
+            level: "Intermediate",
+            color: "from-purple-500 to-pink-500"
+        },
+        {
+            title: "Node.js",
+            image: Nodejs,
+            description: "Powerful runtime environment enabling JavaScript execution on the server-side for efficient backend development.",
+            level: "Intermediate",
+            color: "from-green-500 to-emerald-500"
+        },
+        {
+            title: "Express.js",
+            image: ExpressJs,
+            description: "Fast, minimal web framework for Node.js, perfect for building robust APIs and web applications.",
+            level: "Intermediate",
+            color: "from-gray-600 to-gray-800"
+        },
+        {
+            title: "SQL",
+            image: Sql,
+            description: "Standard language for managing relational databases, data manipulation, and complex query operations.",
+            level: "Intermediate",
+            color: "from-blue-600 to-indigo-600"
+        },
+        {
+            title: "HTML5",
+            image: Html,
+            description: "Modern markup language for structuring web content with semantic elements and enhanced capabilities.",
+            level: "Advanced",
+            color: "from-orange-400 to-red-400"
+        },
+        {
+            title: "CSS3",
+            image: CSS,
+            description: "Advanced styling language with flexbox, grid, animations, and responsive design capabilities.",
+            level: "Advanced",
+            color: "from-blue-400 to-purple-500"
+        },
+        {
+            title: "MongoDB",
+            image: MongoDB,
+            description: "NoSQL document database offering flexible schema design, scalability, and high performance for modern applications.",
+            level: "Intermediate",
+            color: "from-green-600 to-green-700"
+        },
+        {
+            title: "GitHub",
+            image: github,
+            description: "Version control platform for collaborative development, code management, and project organization.",
+            level: "Advanced",
+            color: "from-gray-700 to-black"
+        },
+        {
+            title: "Communication",
+            image: comuni,
+            description: "Effective communication skills for clear idea exchange, team collaboration, and stakeholder engagement.",
+            level: "Advanced",
+            color: "from-teal-500 to-cyan-500"
+        }
+    ];
+
+    const getLevelBadge = (level) => {
+        const badges = {
+            "Advanced": "bg-green-100 text-green-800 border-green-200 dark:bg-green-900 dark:text-green-200 dark:border-green-700",
+            "Intermediate": "bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:border-blue-700",
+            "Beginner": "bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900 dark:text-yellow-200 dark:border-yellow-700"
+        };
+        return badges[level] || badges["Intermediate"];
+    };
+
     return (
         <>
-            <section id="skills" className="min-h-screen flex items-center justify-center flex-col">
-
-                <h1 className=' font-bold text-center text-3xl md:text-5xl my-4'>Skills</h1>
-
-                <div className=' flex flex-col md:flex-row w-screen h-auto p-3 gap-4 md:justify-center'>
-
-                    {/* photo section*/}
-                    <div
-                        className='bg-[#0d0b0d] p-1 w-[99%] md:w-[40%] md:h-[80vh] h-[70vh] flex flex-col text-center items-center overflow-hidden rounded-br-3xl rounded-tl-3xl'
-                        style={{
-                            backgroundImage: `url(${plant})`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat'
-                        }}
-                    >
-                        <img src={me} alt="Me" className='h-[250px] w-[250px] mt-2 rounded-full object-contain' />
-                        <div className='mt-4 text-white h-[100px] md:w-[70%] w-[90%] '>
-                            <p className='md:text-[29px] text-[32px] text-gray-300 dark:text-neutral-100'>
-                                I am happy to know you that 4+ Projects deployed sucessfully!
-                            </p>
-                        </div>
-                    </div>
-
-                    {/*langueges cards section */}
-                    <div className='md:h-[80vh] md:w-[50%] h-[65vh] gap-3 flex md:flex-row flex-col items-center justify-evenly md:flex-wrap overflow-y-auto no-scrollbar scroll-smooth rounded-md '>
-
-
-                        {/* ReactJs */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf]'>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={reactjs} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer ' />
-                            </div>
-                            <div className='h-[190px] px-2 py-2 flex flex-col items-center justify-evenly overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[13px]'>
-                                    React.js is a powerful JavaScript library that simplifies web development through its component-based architecture, allowing developers to create reusable UI elements that reduce code redundancy. Its Virtual DOM feature ensures fast performance by efficiently updating only necessary parts of a webpage, rather than reloading everything. The framework comes with extensive community support and a rich ecosystem of tools and libraries, making development faster and easier. What makes React particularly appealing is its simple learning curve combined with powerful features like JSX syntax and state management, making it an excellent choice for both beginners and experienced developers.
-                                </p>
-                            </div>
-
-                        </div>
-
-                        {/* Java */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf] '>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={Java} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer' />
-                            </div>
-                            <div className='h-[190px] px-3 flex flex-col items-center justify-evenly w-[99%] overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[14px]'>Java's compiled code (bytecode) runs on any device supporting Java Virtual Machine (JVM), making it:
-                                    - Write Once, Run Anywhere (WORA)
-                                    - Independent of underlying hardware and OS
-                                    - Highly portable and reusable
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* javaScript */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf] '>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={Js} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer' />
-                            </div>
-                            <div className='h-[190px] px-3 flex flex-col items-center justify-evenly w-[99%] overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[14px]'> "Versatility"
-                                    JavaScript seamlessly adapts to:
-                                    - Client-side scripting
-                                    - Server-side programming (Node.js)
-                                    - Mobile and desktop app development
-                                    - Game development
-                                    - IoT programming
-
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* OOPS */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf] '>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={Oops} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer ' />
-                            </div>
-                            <div className='h-[190px] px-3 flex flex-col items-center justify-evenly w-[99%] overflow-y-auto  no-scrollbar scroll-smooth'>
-                                {/* <h1 className='font-bold font-[Gill sans] text-3xl md:text-[20px]'>OOPS</h1> */}
-                                <p className='text-[15px] md:text-[14px]'> OOPS used for design and develop scalable, and efficient software solutions. By embracing encapsulation, inheritance, and polymorphism, and maintainable code that simplifies complexity and drives innovation."
-                                </p>
-
-                            </div>
-                        </div>
-
-                        {/* Node js */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf]'>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={Nodejs} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer ' />
-                            </div>
-                            <div className='h-[190px] px-3 flex flex-col items-center justify-evenly w-[99%] overflow-y-auto  no-scrollbar scroll-smooth '>
-                                <p className='text-[15px] md:text-[14px]'>I prefer Node Js beacause it proivdes us a powerfull runtime environment that allows to run JavaScript to create more efficient Websites wtth faster backend</p>
-
-                            </div>
-                        </div>
-
-                        {/* Express js */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf]'>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={ExpressJs} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer ' />
-                            </div>
-                            <div className='h-[190px] px-3 flex flex-col items-center justify-evenly w-[99%] overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[14px]'>
-                                    Express.js is a fast and flexible Node.js framework for building web applications and APIs. It simplifies server-side development with a minimalist approach. Scalable, secure, and easy to maintain.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* SQL */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf]'>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={Sql} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer ' />
-                            </div>
-                            <div className='h-[190px] p-2 flex flex-col items-center justify-evenly w-[99%] overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[14px]'>
-                                    "SQL is a standard language for storing, manipulating, and retrieving data in relational databases." <br />"SQL (Structured Query Language) is a standard programming language used for managing, manipulating, and retrieving data stored in relational database management systems (RDBMS). It enables users to perform various operations, including creating, modifying, and querying databases, as well as controlling access and ensuring data integrity."
-                                </p>
-                            </div>
-                        </div>
-
-
-                        {/* HTML */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf] '>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={Html} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer ' />
-                            </div>
-                            <div className='h-[190px] p-3 flex flex-col items-center justify-evenly overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[14px]'>
-                                    "HTML is a markup language for structuring and formatting web page content." <br />HTML is mainly used to develop and create web pages and applications. Combined with CSS and JavaScript, it has become a landmark in web development. Having CSS helps in layout, colors and appearance while JavaScript helps in embedding programs and affecting behavior of the web page contents.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* CSS */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf]'>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={CSS} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 md:transition-all duration-500 cursor-pointer' />
-                            </div>
-                            <div className='h-[190px] px-4 py-2 flex flex-col text-left justify-evenly overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[14px] overflow-y-auto  no-scrollbar scroll-smooth'>
-                                    CSS stand for Cascading Style Sheets Is used to style html document and it make a application more user interactive and user friendly <br />
-                                    1. Consistency <br />
-                                    2. Flexibility <br />
-                                    3. Customizability <br />
-                                    4. Responsive Design <br />
-                                    5. Improved User Experience:- CSS enhances visual appeal, readability, and overall user experience.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* MongoDBL */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf]'>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={MongoDB} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 md:transition-all duration-500 cursor-pointer' />
-                            </div>
-                            <div className='h-[190px] px-2 py-2 flex flex-col items-center justify-evenly overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[14px]'>
-
-                                    I use Mongodb, because<br />MongoDB is a document-oriented database that offers a flexible schema, scalable architecture, high performance, and rich query capabilities, making it ideal for big data, content management, and real-time analytics use cases, with features like data replication, and robust security, all managed through a intuitive GUI like MongoDB Compass, providing a powerful solution for modern application development."
-
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Github */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf]'>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={github} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer' />
-                            </div>
-                            <div className='h-[190px] px-2 py-2 flex flex-col items-center justify-evenly overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[14px]'>
-                                    I use GitHub for many reasons, including: <br />
-                                    Version control: GitHub makes it easy to track changes and navigate revisions to code.
-                                    Open source: GitHub is used by almost every open-source project to manage its code.
-                                    Learning: GitHub is a robust platform for learning and expanding your programming knowledge.
-
-                                </p>
-                            </div>
-                        </div>
-
-                        {/*communication  */}
-                        <div className='md:w-[45%] md:h-[65%] w-[90vw] flex flex-col rounded-lg text-center items-center border-indigo-400 border-x-2 border-y-2 bg-[#d5d5d7cf] dark:bg-[#515153cf]'>
-                            <div className='w-full md:h-[55%] bg-purple-950 overflow-hidden rounded-tl-lg rounded-tr-lg'>
-                                <img src={comuni} alt="" className='w-full md:h-[98%] h-[220px] rounded-tl-lg rounded-tr-lg object-cover md:hover:scale-125 transition-all duration-500 cursor-pointer ' />
-                            </div>
-                            <div className='h-[190px] px-2 py-2 flex flex-col items-center justify-evenly overflow-y-auto  no-scrollbar scroll-smooth'>
-                                <p className='text-[15px] md:text-[13px]'>
-                                    Effective communication is the process of exchanging ideas, thoughts, opinions, knowledge, and data so that the message is received and understood with clarity and purpose. When we communicate effectively, both the sender and receiver feel satisfied..
-                                </p>
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
-
+            <section id="skills" className="min-h-screen flex items-center justify-center flex-col bg-white dark:!bg-gray-800 transition-colors duration-300">
+                
+                {/* Enhanced Responsive Header */}
+                <div className="text-center mb-6 sm:mb-8 px-4">
+                    <h1 className="font-bold text-gray-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-white dark:via-gray-200 dark:to-gray-400 text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4">
+                        Technical Skills
+                    </h1>
+                    <div className="w-16 sm:w-20 md:w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
                 </div>
 
+                <div className="flex flex-col lg:flex-row w-full max-w-7xl mx-auto px-2 sm:px-4 gap-4 sm:gap-6 lg:justify-center">
+
+                    {/* Enhanced Profile Section with Better Mobile Support */}
+                    <div className="relative w-full lg:w-[40%] h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden rounded-2xl">
+                        {/* Background with overlay */}
+                        <div 
+                            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                            style={{
+                                backgroundImage: `url(${plant})`,
+                            }}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                        </div>
+                        
+                        {/* Content with responsive sizing */}
+                        <div className="relative z-10 flex flex-col items-center justify-center h-full p-4 sm:p-6 text-center">
+                            <div className="relative mb-4 sm:mb-6">
+                                <img 
+                                    src={me} 
+                                    alt="Profile" 
+                                    className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full object-cover border-4 border-white/20 shadow-2xl backdrop-blur-sm" 
+                                />
+                                <div className="absolute -bottom-2 -right-2 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center">
+                                    <span className="text-white font-bold text-sm sm:text-lg">4+</span>
+                                </div>
+                            </div>
+                            
+                            <div className="backdrop-blur-md bg-white/10 rounded-xl p-4 sm:p-6 border border-white/20 max-w-sm w-full">
+                                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">Project Success</h3>
+                                <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed">
+                                    Successfully deployed <span className="font-semibold text-blue-400">4+ projects</span> with modern technologies and best practices
+                                </p>
+                                <div className="mt-4 flex justify-center space-x-2">
+                                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-75"></div>
+                                    <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse delay-150"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Enhanced Skills Grid with Better Responsive Columns */}
+                    <div className="h-[60vh] sm:h-[70vh] md:h-[75vh] lg:h-[80vh] lg:w-[50%] overflow-y-auto custom-scrollbar">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-3 sm:gap-4 p-2">
+                            {skills.map((skill, index) => (
+                                <div 
+                                    key={index}
+                                    className="group relative bg-[#d5d5d7cf] dark:bg-white/10 dark:backdrop-blur-md rounded-xl border border-gray-300 dark:border-white/20 overflow-hidden hover:bg-gray-200 dark:hover:bg-white/15 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                                >
+                                    {/* Gradient overlay */}
+                                    <div className={`absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${skill.color}`}></div>
+                                    
+                                    {/* Image section with responsive height */}
+                                    <div className="relative overflow-hidden h-24 sm:h-28 md:h-32">
+                                        <img 
+                                            src={skill.image} 
+                                            alt={skill.title}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                        
+                                        {/* Level badge with responsive sizing */}
+                                        <div className={`absolute top-1 right-1 sm:top-2 sm:right-2 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full text-xs font-medium border ${getLevelBadge(skill.level)}`}>
+                                            {skill.level}
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Content section with responsive padding */}
+                                    <div className="p-3 sm:p-4">
+                                        <h3 className="text-gray-900 dark:text-white font-bold text-sm sm:text-base md:text-lg mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-300 transition-colors">
+                                            {skill.title}
+                                        </h3>
+                                        <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3">
+                                            {skill.description}
+                                        </p>
+                                        
+                                        {/* Progress indicator with responsive spacing */}
+                                        <div className="mt-2 sm:mt-3 flex items-center space-x-2">
+                                            <div className="flex-1 bg-gray-300 dark:bg-gray-700 rounded-full h-1.5 sm:h-2">
+                                                <div 
+                                                    className={`h-1.5 sm:h-2 rounded-full bg-gradient-to-r ${skill.color} transition-all duration-1000`}
+                                                    style={{ 
+                                                        width: skill.level === 'Advanced' ? '90%' : skill.level === 'Intermediate' ? '70%' : '50%',
+                                                        animationDelay: `${index * 100}ms`
+                                                    }}
+                                                ></div>
+                                            </div>
+                                            <span className="text-xs text-gray-500 dark:text-gray-400 hidden sm:inline">
+                                                {skill.level === 'Advanced' ? '90%' : skill.level === 'Intermediate' ? '70%' : '50%'}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom accent with responsive width */}
+                <div className="mt-6 sm:mt-8 w-full max-w-4xl mx-auto px-4">
+                    <div className="h-px bg-gradient-to-r from-transparent via-gray-400 dark:via-white/30 to-transparent"></div>
+                </div>
             </section>
+
+            <style jsx>{`
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 4px;
+                }
+                @media (min-width: 640px) {
+                    .custom-scrollbar::-webkit-scrollbar {
+                        width: 6px;
+                    }
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: rgba(0, 0, 0, 0.1);
+                }
+                .dark .custom-scrollbar::-webkit-scrollbar-track {
+                    background: rgba(255, 255, 255, 0.1);
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: linear-gradient(to bottom, #6b7280, #4b5563);
+                }
+                .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: linear-gradient(to bottom, #4b5563, #374151);
+                }
+                .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                    background: linear-gradient(to bottom, #2563eb, #7c3aed);
+                }
+                .line-clamp-2 {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+                .line-clamp-3 {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+                
+                /* Ensure proper mobile viewport handling */
+                @media (max-width: 640px) {
+                    .custom-scrollbar {
+                        -webkit-overflow-scrolling: touch;
+                    }
+                }
+            `}</style>
         </>
-    )
+    );
 }
