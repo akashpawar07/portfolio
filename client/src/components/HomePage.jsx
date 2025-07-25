@@ -4,9 +4,9 @@ import Image_Container from './ImageContainerHomePage';
 import MyResume from '../assets/Akash_latest_Resume.pdf'
 import { FaArrowAltCircleDown } from "react-icons/fa";
 import Socialmedia from './Socialmedia'
-import mainLogo from '../assets/logo/logo3.png'
-import shreeKrishnaLogo from '../assets/logo/shreeKrishnaLogo.png'
-import model from '../assets/logo/mainModel.png'
+// import mainLogo from '../assets/logo/logo3.png'
+// import shreeKrishnaLogo from '../assets/logo/shreeKrishnaLogo.png'
+// import model from '../assets/logo/mainModel.png'
 
 
 function Home() {
@@ -15,7 +15,7 @@ function Home() {
 
   // Sanskrit text for intro
   const [sanskritText] = useTypewriter({
-    words: ['कृष्णाय वासुदेवाय हरये परमात्मने |\nप्रणतक्लेशनाशाय गोविन्दाय नमो नमः ||'],
+    words: ['Learning today, leading tomorrow'],
     loop: 1,
     typeSpeed: 80,
     delaySpeed: 1000,
@@ -29,7 +29,7 @@ function Home() {
 
   // Main page typewriter effect
   let [typeEffect] = useTypewriter({
-    words: ['Web Developer', 'Backend Developer', 'Frontend developer', 'MERN Developer'],
+    words: ['Backend Developer', 'MERN Developer'],
     loop: {},
     typeSpeed: 100,
     delaySpeed: 100
@@ -39,10 +39,9 @@ function Home() {
     <>
       {/* Sanskrit Intro Overlay */}
       {showIntro && (
-        <div 
-          className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-1000 ${
-            introComplete ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
-          }`}
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-1000 ${introComplete ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
+            }`}
           style={{
             background: 'rgba(0, 0, 0, 0.85)',
             backdropFilter: 'blur(10px)',
@@ -50,19 +49,11 @@ function Home() {
           }}
         >
           <div className="text-center px-4 max-w-4xl">
-            {/* Shree Krishna Logo Only */}
-            <div className="mb-8 flex justify-center items-center">
-              <div className="relative group">
-                <img 
-                  src={shreeKrishnaLogo} 
-                  alt="Shree Krishna" 
-                  className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain filter drop-shadow-lg 
-                           transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-2xl
-                           animate-pulse"
-                />
-              </div>
+            <div>
+              <img src="" alt="" />
             </div>
-            
+
+
             {/* Sanskrit text */}
             <div className="mb-8">
               <p className="text-yellow-300 text-xl italic md:text-4xl lg:text-3xl font-bold leading-relaxed whitespace-pre-line font-serif">
@@ -73,19 +64,15 @@ function Home() {
               </p>
             </div>
 
-            {/* Subtitle */}
-            <div className="text-white/80 text-sm md:text-base lg:text-lg font-medium">
-              <p className="italic">Prayer to Lord Krishna for Protection and Guidance</p>
-            </div>
-
             {/* Loading indicator */}
             <div className="mt-8 flex justify-center">
               <div className="flex space-x-2">
-                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-bounce"></div>
-                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                <div className="w-2 h-2 bg-yellow-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                <div className="w-3 h-3 bg-blue-700 rounded-full animate-bounce" style={{ animationDuration: '0.6s' }}></div>
+                <div className="w-3 h-3 bg-blue-700 rounded-full animate-bounce" style={{ animationDelay: '0.15s', animationDuration: '0.6s' }}></div>
+                <div className="w-3 h-3 bg-blue-700 rounded-full animate-bounce" style={{ animationDelay: '0.3s', animationDuration: '0.6s' }}></div>
               </div>
             </div>
+
           </div>
         </div>
       )}
@@ -98,8 +85,8 @@ function Home() {
           <div className='md:w-[45%] md:p-[30px] p-6 flex flex-col gap-4 mt-[45px] ml-[px]'>
 
             <p className='font-semibold md:text-[16px] text-left animate-pulse dark:text-neutral-100'>
-              अध्ययनात् लभते ज्ञानं ज्ञानात् लभते गुणान् | <br />
-              गुणेभ्यो लभते धर्मो धर्मात् लभते सुखम् ||
+              "Arise, awake, stop not till the goal is reached." <br />
+
             </p>
 
             <h1 className='font-bold font-serif md:text-[35px] text-[22px] md:h-[51px] text-left dark:text-neutral-100'>I'm a
@@ -123,7 +110,7 @@ function Home() {
             </div>
           </div>
 
-          {/* Home page Image slider section */}
+          {/* Home Hero image model section */}
           <div className='md:w-[50%] md:h-[99%] md:p-4 md:mt-[40px]'>
             <Image_Container />
           </div>

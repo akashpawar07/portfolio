@@ -1,12 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import svg from '../assets/logo/mainModel.png';
+import HomePageModel from '../assets/logo/mainModel1.png'; // this image is took from cleanpng.com
+import HomePageModel2 from '../assets/logo/mainModel2.png';
+import HomePageModel3 from '../assets/logo/mainModel3.png';
+// import HomePageModel4 from '../assets/logo/mainModel4.png';
 
 const SvgHeroSection = () => {
+    // Configuration array - easily add/remove images here
+    const imageConfig = [
+        { src: HomePageModel, alt: "Homepage SVG Model 1" },
+        { src: HomePageModel2, alt: "Homepage SVG Model 2" },
+        { src: HomePageModel3, alt: "Homepage SVG Model 3" },
+        // { src: HomePageModel4, alt: "Homepage SVG Model 4" },
+    ];
+
     const [isVisible, setIsVisible] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     useEffect(() => {
         setIsVisible(true);
-    }, []);
+        
+        // Set up interval to switch images every 1 minute (60000ms)
+        const imageInterval = setInterval(() => {
+            setCurrentImageIndex(prev => (prev + 1) % imageConfig.length);
+        }, 20000);
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(imageInterval);
+    }, [imageConfig.length]);
 
     return (
         <div className="relative flex items-center justify-center h-[50vh] md:h-[92vh] lg:h-[95vh] p-2">
@@ -44,8 +64,8 @@ const SvgHeroSection = () => {
                 isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-95'
             }`}>
                 <img
-                    src={svg}
-                    alt="Homepage SVG"
+                    src={imageConfig[currentImageIndex].src}
+                    alt={imageConfig[currentImageIndex].alt}
                     className="w-96 h-96 md:w-[450px] md:h-[450px] lg:w-[530px] lg:h-[530px] object-contain hover:scale-105 transition-all duration-500 ease-in-out hover:rotate-1 animate-bounce-slow rounded-tl-3xl rounded-br-3xl"
                 />
             </div>
