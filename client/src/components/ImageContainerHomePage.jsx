@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import HomePageModel from '../assets/logo/mainModel1.png'; // this image is took from cleanpng.com
 import HomePageModel2 from '../assets/logo/mainModel2.png';
 import HomePageModel3 from '../assets/logo/mainModel3.png';
-// import HomePageModel4 from '../assets/logo/mainModel4.png';
 
 const SvgHeroSection = () => {
     // Configuration array - easily add/remove images here
