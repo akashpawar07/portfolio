@@ -7,6 +7,7 @@ const ProjectsCarousel = () => {
     const [touchEnd, setTouchEnd] = useState(null);
 
     const projects = [
+        // Project I (Riya Industriyal Services)
         {
             id: 1,
             title: "Riya Industriyal Services",
@@ -86,11 +87,29 @@ const ProjectsCarousel = () => {
                                 </a>
                             </div>
                         </div>
+                        <div className="relative mt-6">
+                            <h2 className="font-semibold mb-3 text-xl flex items-center gap-2">
+                                <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                Github Repository
+                            </h2>
+                            <div className="pl-6 border-l-2 border-orange-500/20 ">
+                                <a
+                                    href="https://github.com/akashpawar07/Riya-Industrial-Services"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-400 italic hover:text-blue-600 hover:underline"
+                                >
+                                    https://github.com/akashpawar07/Riya-Industrial-Services
+                                </a>
+                            </div>
+                        </div>
 
                     </div>
                 </>
             )
         },
+
+        // Project II (Personal Portfolio)
         {
             id: 2,
             title: "Personal Portfolio",
@@ -147,10 +166,48 @@ const ProjectsCarousel = () => {
                                 <p>• Optimized application performance, ensuring fast loading times and a smooth user experience.</p>
                             </div>
                         </div>
+
+
                     </div>
+
+                    <div className="relative mt-6">
+                        <h2 className="font-semibold mb-3 text-xl flex items-center gap-2">
+                            <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                            Site Live
+                        </h2>
+                        <div className="pl-6 border-l-2 border-orange-500/20 flex flex-wrap">
+                            <a
+                                href="https://akashpawar07.github.io/portfolio"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-400 italic hover:text-blue-600 hover:underline"
+                            >
+                                https://akashpawar07.github.io/portfolio
+                            </a>
+                        </div>
+                    </div>
+                    <div className="relative mt-6">
+                        <h2 className="font-semibold mb-3 text-xl flex items-center gap-2">
+                            <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                            Github Repository
+                        </h2>
+                        <div className="pl-6 border-l-2 border-orange-500/20 flex flex-wrap">
+                            <a
+                                href="https://github.com/akashpawar07/portfolio"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-400 italic hover:text-blue-600 hover:underline"
+                            >
+                                https://github.com/akashpawar07/portfolio
+                            </a>
+                        </div>
+                    </div>
+
                 </>
             )
         },
+
+        // Project III (CAMPUS-CONNECT)
         {
             id: 3,
             title: "CAMPUS-CONNECT",
@@ -214,10 +271,28 @@ const ProjectsCarousel = () => {
                                 </a>
                             </div>
                         </div>
+                        <div className="relative mt-6">
+                            <h2 className="font-semibold mb-3 text-xl flex items-center gap-2">
+                                <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+                                Github Repository
+                            </h2>
+                            <div className="pl-6 border-l-2 border-orange-500/20 flex flex-wrap">
+                                <a
+                                    href="https://github.com/akashpawar07/collegeAdmissionForm"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-blue-400 italic hover:text-blue-600 hover:underline"
+                                >
+                                    hhttps://github.com/akashpawar07/collegeAdmissionForm
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </>
             )
         },
+
+        // Project IV (CALCMATE)
         {
             id: 4,
             title: "CALCMATE",
@@ -285,6 +360,7 @@ const ProjectsCarousel = () => {
                 </>
             )
         },
+
     ];
 
     // Touch handlers
