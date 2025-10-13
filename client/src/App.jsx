@@ -112,11 +112,11 @@ const App = () => {
           <section id="portfolio/about">
             <AboutPage />
           </section>
-          <section id="portfolio/skills">
-            <SkillsPage />
-          </section>
           <section id="portfolio/projects">
             <ProjectPage />
+          </section>
+          <section id="portfolio/skills">
+            <SkillsPage />
           </section>
           <section id="portfolio/gallery">
             <Gallery />
