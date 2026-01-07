@@ -18,7 +18,7 @@ function Contact() {
   const [submitError, setSubmitError] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false) // New state for tracking submission
 
-   const API_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
   // Remove global axios default and use instance instead
   const apiClient = axios.create({
@@ -28,7 +28,7 @@ function Contact() {
       'Content-Type': 'application/json'
     }
   });
-  
+
   // Formik configuration
   const { values, errors, touched, handleSubmit, handleBlur, handleChange, resetForm } = useFormik({
     initialValues: initialValues,
@@ -38,17 +38,17 @@ function Contact() {
       try {
         setSubmitError(null);
         setIsSubmitting(true); // Set submitting state to true when form is submitted
-        
+
         // Use apiClient instance with relative URL
         const response = await apiClient.post('/contact', values);
-        
+
         // Reset form and show modal on successful submission
         action.resetForm();
         setShowModal(true);
-        
+
       } catch (error) {
         console.error('Error submitting form:', error.response ? error.response.data : error.message);
-        
+
         // Set specific error message
         setSubmitError(error.response?.data?.message || 'Failed to submit form. Please try again.');
       } finally {
@@ -62,34 +62,63 @@ function Contact() {
     const closeModal = () => setShowModal(false);
 
     useEffect(() => {
-      document.body.style.overflowY = "hidden"
+      document.body.style.overflowY = "hidden";
 
       return () => {
-        document.body.style.overflowY = "scroll"
+        document.body.style.overflowY = "scroll";
       };
-    }, [])
+    }, []);
 
     return (
-      // modal for greating after successful message sent
-      <div className='fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center bg-indigo-700 z-[50]'>
-        <div className='md:mt-10 flex flex-col gap-2 items-center text-slate-800 shadow-4xl bg-neutral-50 w-[95%] md:w-[33vw] md:h-[55vh] mx-h-[40vh] rounded-md'>
-          <div className='flex flex-col items-center justify-between gap-4 px-4 py-2 '>
-            <img src={checkBtn} alt="check-button" className='w-[60px] h-[60px] relative mt-[-30px]' />
-            <h1 className='font-bold text-2xl '>Thank You !</h1>
-            <div className='flex flex-col justify-between items-center gap-7 md:mt-2'>
-              <p className='text-center text-[16px]'>Thank you for reaching out, I appreciate your comment</p>
-              <button 
-                className='p-2 mb-2 w-[50%] bg-[#2db02d] font-bold text-neutral-50 hover:bg-[#37c137] rounded-md'
-                onClick={closeModal}
-              >
-                OK
-              </button>
+      <div className="fixed inset-0 z-[50] flex items-center justify-center
+                    bg-black/40 backdrop-blur-sm px-4">
+
+        {/* Modal Card */}
+        <div className="relative w-full max-w-md rounded-2xl
+                      bg-white dark:bg-gray-900
+                      shadow-2xl
+                      animate-in fade-in zoom-in duration-300">
+
+          {/* Success Icon */}
+          <div className="flex justify-center -mt-12">
+            <div className="w-20 h-20 rounded-full bg-green-500
+                          flex items-center justify-center shadow-lg">
+              <img
+                src={checkBtn}
+                alt="Success"
+                className="w-10 h-10"
+              />
             </div>
+          </div>
+
+          {/* Content */}
+          <div className="px-6 pt-6 pb-8 text-center">
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+              Thank You!
+            </h1>
+
+            <p className="mt-3 text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+              Thank you for reaching out. I truly appreciate your message and
+              will get back to you soon.
+            </p>
+
+            {/* Action */}
+            <button
+              onClick={closeModal}
+              className="mt-6 w-full rounded-lg bg-green-500
+                       py-3 font-semibold text-white
+                       hover:bg-green-600
+                       focus:outline-none focus:ring-2 focus:ring-green-400
+                       transition"
+            >
+              Okay
+            </button>
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
+
 
   return (
     <>
@@ -115,7 +144,7 @@ function Contact() {
                 value={values.username}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="shadow-sm border text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full md:p-3 p-[14px] bg-gray-400 dark:bg-gray-700 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" 
+                className="shadow-sm border text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full md:p-3 p-[14px] bg-gray-400 dark:bg-gray-700 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
               />
               {errors.username && touched.username ? (
                 <p className='text-red-500 text-[14px] ml-1'>{errors.username}</p>
@@ -131,7 +160,7 @@ function Contact() {
                 value={values.useremail}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="block md:p-3 p-[14px] w-full text-sm text-gray-900 bg-gray-400 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 bor dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-700 dark:focus:border-primary-500 dark:shadow-sm-light" 
+                className="block md:p-3 p-[14px] w-full text-sm text-gray-900 bg-gray-400 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 bor dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-700 dark:focus:border-primary-500 dark:shadow-sm-light"
               />
               {errors.useremail && touched.useremail ? (
                 <p className='text-red-500 text-[14px] ml-1'>{errors.useremail}</p>
@@ -147,7 +176,7 @@ function Contact() {
                 value={values.usermessage}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-400 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 placeholder-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-400 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 placeholder-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               />
               {errors.usermessage && touched.usermessage ? (
                 <p className='text-red-500 text-[14px] ml-1'>{errors.usermessage}</p>
