@@ -116,7 +116,8 @@ const App = () => {
       >
         <Navbar
           darkMode={darkMode}
-          toggleDarkMode={toggleDarkMode}
+          setDarkMode={setDarkMode}
+          toggleDarkMode={toggleDarkMode} // (keep for mobile if you want)
           activeSection={activeSection}
           scrollToSection={scrollToSection}
         />
