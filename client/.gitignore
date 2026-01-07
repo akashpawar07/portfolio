@@ -35,14 +35,23 @@ dist-ssr
 // nmp run dev
 
 
-//USE THIS FOR PUSHING CODE TO GITHUB(client)...............................
-//first of all check your present work directory(PWD), then
-//git status
-//git add . or git add filename
-//git commit -m "a meaningful message"
-//git push
+//USE THIS FOR PUSH THE CODE TO GITHUB OF(client)...............................
+1. first of all check your present work directory(PWD), then
+2. git status
+3. git add . or git add filename
+4. git commit -m "a meaningful message"
+5. git push
+
+//USE THIS FOR PUSH THE CODE TO GITHUB OF(SERVER)...............................
+1. first of all check your present work directory(PWD), then
+2. git status
+3. git add . or git add filename
+4. git commit -m "a meaningful message"
+5. git push
 
 
-// USE THIS FOR deployment OF PROJECT....................................... 
-// build command : npm run predeploy
-//deployment command : npm run deploy
+// USE THIS FOR DEPLOYEMENT OF PROJECT TO THE GITHUB PAGES....................................... 
+1. change the directory to /client
+2. build command : npm run predeploy    <---this command will do this automatically-- predeploy: npm run build,
+2. deployment command : npm run deploy  <--this command will do this automatically-- deploy": gh-pages -d dist
+    
