@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios'
 import { Star, User, MoreHorizontal, Edit3, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 
@@ -11,7 +11,7 @@ export default function PortfolioRating() {
   const [showWriteReview, setShowWriteReview] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false); 
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
   const API_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
@@ -22,7 +22,7 @@ export default function PortfolioRating() {
       setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/ratingandfeedback`);
       // console.log("fetching data from backend = ", response.data);
-      
+
       // Fix: Handle different possible response structures
       let reviewsData = [];
       if (response.data && Array.isArray(response.data)) {
@@ -32,7 +32,7 @@ export default function PortfolioRating() {
       } else if (response.data && response.data.reviews && Array.isArray(response.data.reviews)) {
         reviewsData = response.data.reviews;
       }
-      
+
       setReviews([...reviewsData].reverse());
       setError(null);
     } catch (err) {
@@ -58,11 +58,6 @@ export default function PortfolioRating() {
       .join('')
       .toUpperCase()
       .slice(0, 2);
-  };
-
-  // Generate avatar from name and use it as avatar field
-  const generateAvatar = (name) => {
-    return getInitials(name);
   };
 
   // Calculate average rating - Fix: Add safety check
@@ -148,7 +143,7 @@ export default function PortfolioRating() {
         // Fix: Ensure reviews is always an array before spreading
         const currentReviews = Array.isArray(reviews) ? reviews : [];
         setReviews([newReviewForDisplay, ...currentReviews]);
-        
+
         setIsSubmitted(true);
         setShowWriteReview(false);
         setUserRating(0);
@@ -159,7 +154,7 @@ export default function PortfolioRating() {
         // Reset success message after 3 seconds
         setTimeout(() => {
           setIsSubmitted(false);
-        }, 3000);
+        }, 4000);
       } catch (err) {
         setError('Failed to submit review. Please try again.');
         // console.error('Error submitting review:', err.response?.data || err.message);
@@ -307,33 +302,57 @@ export default function PortfolioRating() {
 
       {/* Success Modal */}
       {isSubmitted && (
-        <div className='fixed inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center bg-indigo-700 z-[50]'>
-          <div className='md:mt-10 flex flex-col gap-2 items-center text-slate-800 shadow-4xl bg-neutral-50 w-[95%] md:w-[33vw] md:h-[55vh] mx-h-[40vh] rounded-md'>
-            <div className='flex flex-col items-center justify-between gap-4 px-4 py-2 '>
-              <div className='w-[60px] h-[60px] relative mt-[-30px] bg-[#2db02d] rounded-full flex items-center justify-center'>
-                <Check className='w-[30px] h-[30px] text-white' />
+        <div className="fixed inset-0 z-[50] flex items-center justify-center
+                  bg-black/40 backdrop-blur-sm px-4">
+
+          {/* Modal Card */}
+          <div className="relative w-full max-w-md rounded-2xl
+                    bg-white dark:bg-gray-900
+                    shadow-2xl
+                    animate-in fade-in zoom-in duration-300">
+
+            {/* Success Icon */}
+            <div className="flex justify-center -mt-12">
+              <div className="w-20 h-20 rounded-full bg-green-500
+                        flex items-center justify-center shadow-lg">
+                <Check className="w-10 h-10 text-white" />
               </div>
-              <h1 className='font-bold text-2xl '>Thank You !</h1>
-              <div className='flex flex-col justify-between items-center gap-7 md:mt-2'>
-                <p className='text-center text-[16px]'>Thank you for your review, I appreciate your feedback</p>
-                <button
-                  className='p-2 mb-2 w-[50%] bg-[#2db02d] font-bold text-neutral-50 hover:bg-[#37c137] rounded-md'
-                  onClick={closeSuccessModal}
-                >
-                  OK
-                </button>
-              </div>
+            </div>
+
+            {/* Content */}
+            <div className="px-6 pt-6 pb-8 text-center">
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+                Review Submitted!
+              </h1>
+
+              <p className="mt-3 text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                Thank you for taking the time to share your feedback.
+                Your review truly helps me improve and grow.
+              </p>
+
+              {/* Action */}
+              <button
+                onClick={closeSuccessModal}
+                className="mt-6 w-full rounded-lg bg-green-500
+                     py-3 font-semibold text-white
+                     hover:bg-green-600
+                     focus:outline-none focus:ring-2 focus:ring-green-400
+                     transition"
+              >
+                Got it
+              </button>
             </div>
           </div>
         </div>
       )}
+
 
       {/* Write Review Modal - Enhanced with Glassomorphic Design */}
       {showWriteReview && (
         <div className='fixed inset-0 bg-black/30 backdrop-blur-sm flex justify-center items-center z-[50]'>
           <div className='md:mt-10 flex flex-col gap-2 items-center shadow-2xl backdrop-blur-md bg-white/95 dark:bg-gray-800/95 border border-white/20 dark:border-gray-700/50 w-[95%] md:w-[40vw] md:h-[85vh] mx-h-[60vh] rounded-xl'>
             <div className='flex flex-col items-center justify-between gap-4 px-6 py-2 w-full'>
-             
+
 
               {/* Star Rating - Enhanced with Glassomorphic Container */}
               <div className="w-full">
