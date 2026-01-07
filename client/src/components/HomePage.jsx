@@ -1,19 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import Image_Container from './ImageContainerHomePage';
-import MyResume from '../assets/Akash_latest_Resume.pdf'
-import { FaArrowAltCircleDown } from "react-icons/fa";
-import Socialmedia from './Socialmedia'
-// import mainLogo from '../assets/logo/logo3.png'
-// import shreeKrishnaLogo from '../assets/logo/shreeKrishnaLogo.png'
-// import model from '../assets/logo/mainModel.png'
-
+import MyResume from '../assets/Akash_latest_Resume.pdf';
+import { FaArrowAltCircleDown } from 'react-icons/fa';
+import Socialmedia from './Socialmedia';
 
 function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [introComplete, setIntroComplete] = useState(false);
 
-  // Sanskrit text for intro
+  // Intro text
   const [sanskritText] = useTypewriter({
     words: ['Learning today, leading tomorrow'],
     loop: 1,
@@ -27,8 +23,8 @@ function Home() {
     }
   });
 
-  // Main page typewriter effect
-  let [typeEffect] = useTypewriter({
+  // Main typewriter
+  const [typeEffect] = useTypewriter({
     words: ['Backend Developer', 'MERN Developer'],
     loop: {},
     typeSpeed: 100,
@@ -37,7 +33,7 @@ function Home() {
 
   return (
     <>
-      {/* Sanskrit Intro Overlay */}
+      {/* INTRO OVERLAY */}
       {showIntro && (
         <div
           className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-1000 ${introComplete ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
@@ -49,76 +45,96 @@ function Home() {
           }}
         >
           <div className="text-center px-4 max-w-4xl">
-            <div>
-              <img src="" alt="" />
+            <p className="text-yellow-300 text-xl md:text-4xl font-bold italic font-serif">
+              {sanskritText}
+              <Cursor cursorColor="#fbbf24" />
+            </p>
+
+            <div className="mt-8 flex justify-center gap-2">
+              <span className="w-3 h-3 bg-blue-700 rounded-full animate-bounce" />
+              <span className="w-3 h-3 bg-blue-700 rounded-full animate-bounce delay-150" />
+              <span className="w-3 h-3 bg-blue-700 rounded-full animate-bounce delay-300" />
             </div>
-
-
-            {/* Sanskrit text */}
-            <div className="mb-8">
-              <p className="text-yellow-300 text-xl italic md:text-4xl lg:text-3xl font-bold leading-relaxed whitespace-pre-line font-serif">
-                {sanskritText}
-                <span className="text-yellow-400">
-                  <Cursor cursorColor="#fbbf24" />
-                </span>
-              </p>
-            </div>
-
-            {/* Loading indicator */}
-            <div className="mt-8 flex justify-center">
-              <div className="flex space-x-2">
-                <div className="w-3 h-3 bg-blue-700 rounded-full animate-bounce" style={{ animationDuration: '0.6s' }}></div>
-                <div className="w-3 h-3 bg-blue-700 rounded-full animate-bounce" style={{ animationDelay: '0.15s', animationDuration: '0.6s' }}></div>
-                <div className="w-3 h-3 bg-blue-700 rounded-full animate-bounce" style={{ animationDelay: '0.3s', animationDuration: '0.6s' }}></div>
-              </div>
-            </div>
-
           </div>
         </div>
       )}
 
-      {/* Main Home Page Content */}
-      <section id='home' className="min-h-screen flex flex-col items-center justify-center lg:mt-[-3rem] mt-[32px]">
-        <div className='w-[97vw] md:h-screen flex md:flex-row justify-center flex-col-reverse gap-1 p-2'>
-
-          {/* Left side section of Home page */}
-          <div className='md:w-[45%] md:p-[30px] p-6 flex flex-col gap-4 mt-[45px] ml-[px]'>
-
-            <p className='font-semibold md:text-[16px] text-left animate-pulse dark:text-neutral-100'>
-              "Arise, awake, stop not till the goal is reached." <br />
-
+      {/* HOME SECTION */}
+      <section
+        id="home"
+        className="
+          pt-16
+          min-h-[calc(100vh-4rem)]
+          flex
+          items-center
+          justify-center
+        "
+      >
+        <div
+          className="
+            w-full
+            max-w-7xl
+            mx-auto
+            px-4
+            flex
+            flex-col-reverse
+            md:flex-row
+            items-center
+            justify-center
+            gap-6
+          "
+        >
+          {/* LEFT CONTENT */}
+          <div className="md:w-1/2 flex flex-col gap-4">
+            <p className="font-semibold animate-pulse dark:text-neutral-100">
+              "Arise, awake, stop not till the goal is reached."
             </p>
 
-            <h1 className='font-bold font-serif md:text-[35px] text-[22px] md:h-[51px] text-left dark:text-neutral-100'>I'm a
-              <span className='text-red-600 font-bold ml-1 animation-smooth'> {typeEffect}</span>
-              <span className='dark:text-neutral-100 text-slate-950'>
-                <Cursor cursorColor='white' cursorBlinking='' />
+            <h1 className="font-bold font-serif text-[22px] md:text-[35px] dark:text-neutral-100">
+              I'm a
+              <span className="text-red-600 font-bold ml-2">
+                {typeEffect}
               </span>
+              <Cursor cursorColor="white" />
             </h1>
 
-            <p className='font-semibold text-left text-[16px] mt-2 dark:text-neutral-100'>
+            <p className="font-semibold text-[16px] dark:text-neutral-100">
               Welcome to my portfolio! I'm a computer science student fueled by passion for crafting innovative digital solutions. With solid foundations in programming and hands-on expertise in frontend and backend development, I've built projects showcased here that highlight my technical skills and problem-solving mindset. Always learning, always pushing boundaries – I'm excited to tackle new challenges in the ever-evolving tech landscape.
             </p>
 
-            <div className='flex md:items-start text-slate-50 justify-center md:justify-start mt-7 gap-5'>
-              <button className='active:bg-blue-800 font-semibold bg-blue-600 gap-2 rounded-md md:w-[25%] w-[35%] flex items-center justify-center text-gray-30 px-3 py-1'>
-                <a href={MyResume} download='akash_latest_resume' className='flex gap-2'>
-                  <p className=''>Resume</p> <span className='mt-1 text-[20px]'><FaArrowAltCircleDown /></span></a>
-              </button>
+            <div className="flex items-center gap-5 mt-6">
+              <a
+                href={MyResume}
+                download="akash_latest_resume"
+                className="
+                  flex
+                  items-center
+                  gap-2
+                  bg-blue-600
+                  hover:bg-blue-700
+                  text-white
+                  font-semibold
+                  px-4
+                  py-2
+                  rounded-md
+                  transition
+                "
+              >
+                Resume <FaArrowAltCircleDown />
+              </a>
 
               <Socialmedia />
             </div>
           </div>
 
-          {/* Home Hero image model section */}
-          <div className='md:w-[50%] md:h-[99%] md:p-4 md:mt-[40px]'>
+          {/* RIGHT IMAGE */}
+          <div className="md:w-1/2 flex justify-center items-center">
             <Image_Container />
           </div>
-
         </div>
       </section>
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

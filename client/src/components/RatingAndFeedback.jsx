@@ -160,7 +160,7 @@ export default function PortfolioRating() {
         setTimeout(() => {
           setIsSubmitted(false);
         }, 3000);
-      } catch (err) {s
+      } catch (err) {
         setError('Failed to submit review. Please try again.');
         // console.error('Error submitting review:', err.response?.data || err.message);
         return
@@ -264,7 +264,7 @@ export default function PortfolioRating() {
   }
 
   return (
-    <div className="md:w-[95vw] h-[99vh] md:ml-16 p-4 sm:mx-2 md:p-6  bg-neutral-200 dark:bg-gray-900 rounded-md shadow-lg my-6">
+    <div className="md:w-[99vw] h-[99vh]  p-4 sm:mx-2 md:p-6  bg-neutral-200 dark:bg-gray-900 rounded-md shadow-lg my-6">
       {/* Error Message */}
       {error && (
         <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">

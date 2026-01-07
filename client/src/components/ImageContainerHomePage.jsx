@@ -28,7 +28,7 @@ const SvgHeroSection = () => {
     }, [imageConfig.length]);
 
     return (
-        <div className="relative flex items-center justify-center h-[50vh] md:h-[92vh] lg:h-[95vh] p-2">
+        <div className="relative flex items-center justify-center h-[40vh] md:h-[90vh] lg:h-[90vh] p-2">
             {/* Corner Accents - Alternating Pairs */}
             {/* Top Left */}
             <div className="absolute top-0 left-0 w-20 h-20 md:w-24 md:h-24">

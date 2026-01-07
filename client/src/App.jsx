@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronUp } from 'lucide-react';
-// import Admin from './components/Admin';
+
 import HomePage from './components/HomePage';
 import AboutPage from './components/AboutPage';
 import ProjectPage from './components/ProjectPage';
@@ -9,93 +9,109 @@ import ContactPage from './components/ContactPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Gallery from './components/Gallery';
-import RatingAndFeedback from './components/RatingAndFeedback'
+import RatingAndFeedback from './components/RatingAndFeedback';
 
 const App = () => {
-  // Initialize darkMode from localStorage or default to true
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem('darkMode');
-    return savedTheme !== null ? JSON.parse(savedTheme) : true; // Default to true for dark mode
+    return savedTheme !== null ? JSON.parse(savedTheme) : true;
   });
-  const [showScrollButton, setShowScrollButton] = useState(false);
-  const [activeSection, setActiveSection] = useState('portfolio/home');
 
-  // Effect to handle dark mode
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+
+  // Persist dark mode
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
+  // Handle initial page load
   useEffect(() => {
-    // Force scroll to top on page load/refresh
-    window.scrollTo(0, 0);
+    // Change this based on your environment
+    const basePath = import.meta.env.BASE_URL.replace(/\/$/, '') || '';
+    const fullPath = window.location.pathname;
+    const path = fullPath.replace(basePath, '').replace('/', '');
+    const validSections = ['home', 'about', 'projects', 'skills', 'gallery', 'contact', 'ratingandfeedback'];
 
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
+    if (path && validSections.includes(path)) {
+      setTimeout(() => {
+        const el = document.getElementById(path);
+        if (el) {
+          const navHeight = 64;
+          window.scrollTo({
+            top: el.offsetTop - navHeight,
+            behavior: 'auto'
+          });
+          setActiveSection(path);
+        }
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
     }
+  }, []);
 
-    // Prevent default scroll restoration
-    document.documentElement.style.scrollBehavior = 'auto';
+  // Scroll spy - detects which section is in view and updates URL
+  useEffect(() => {
+    const sections = ['home', 'about', 'projects', 'skills', 'gallery', 'contact', 'ratingandfeedback'];
+    const basePath = import.meta.env.BASE_URL.replace(/\/$/, '') || '';
 
     const handleScroll = () => {
-      setShowScrollButton(window.scrollY > 400);
+      // Show/hide scroll to top button
+      setShowScrollButton(window.scrollY > 300);
 
-      // Update active section based on scroll position
-      const sections = ['portfolio/home', 'portfolio/about', 'portfolio/skills', 'portfolio/projects', 'portfolio/gallery', 'portfolio/contact', 'portfolio/ratingandfeedback'];
-      const sectionElements = sections.map(section =>
-        document.getElementById(section)
-      );
+      const navHeight = 64;
+      const scrollPosition = window.scrollY + navHeight + 100;
 
-      const currentSection = sectionElements.findIndex(element => {
-        if (!element) return false;
-        const rect = element.getBoundingClientRect();
-        return rect.top <= 100 && rect.bottom >= 100;
-      });
-
-      if (currentSection !== -1) {
-        setActiveSection(sections[currentSection]);
-        // Update URL without triggering page reload
-        window.history.replaceState(null, '', `/${sections[currentSection] === 'home' ? '' : sections[currentSection]}`);
+      // Find which section is in view
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(sections[i]);
+          // Update URL with base path - clean URL
+          const newUrl = sections[i] === 'home' ? (basePath || '/') : `${basePath}/${sections[i]}`;
+          window.history.replaceState(null, '', newUrl);
+          break;
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check immediately
 
-    // Re-enable smooth scrolling after initial load
-    setTimeout(() => {
-      document.documentElement.style.scrollBehavior = 'smooth';
-    }, 0);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Smooth scroll to section with clean URL
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
-    if (element) {
-      const topOffset = element.offsetTop - 60; // Adjust for navbar height
-      window.scrollTo({
-        top: topOffset,
-        behavior: 'smooth'
-      });
-    }
+    if (!element) return;
+
+    const navHeight = 64;
+    const top = element.offsetTop - navHeight;
+
+    window.scrollTo({
+      top,
+      behavior: 'smooth'
+    });
+
+    // Update URL with base path - clean URL
+    const basePath = import.meta.env.BASE_URL.replace(/\/$/, '') || '';
+    const newUrl = sectionId === 'home' ? (basePath || '/') : `${basePath}/${sectionId}`;
+    window.history.replaceState(null, '', newUrl);
+
+    setActiveSection(sectionId);
   };
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const toggleDarkMode = () => {
-    setDarkMode(prevMode => !prevMode);
-  };
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   return (
     <div className={darkMode ? 'dark' : ''}>
       <div
-        className={`min-h-screen pt-16 md:pt-0 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
+        className={`min-h-screen pt-16 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'
           }`}
       >
         <Navbar
@@ -105,65 +121,35 @@ const App = () => {
           scrollToSection={scrollToSection}
         />
 
-        <main className="overflow-x-hidden home">
-          <section id="portfolio/home">
-            <HomePage />
-          </section>
-          <section id="portfolio/about">
-            <AboutPage />
-          </section>
-          <section id="portfolio/projects">
-            <ProjectPage />
-          </section>
-          <section id="portfolio/skills">
-            <SkillsPage />
-          </section>
-          <section id="portfolio/gallery">
-            <Gallery />
-          </section>
-          <section id="portfolio/contact">
-            <ContactPage />
-          </section>
-          <section id="portfolio/ratingandfeedback">
-            <RatingAndFeedback />
-          </section>
+        <main className="overflow-x-hidden">
+          <section id="home"><HomePage /></section>
+          <section id="about"><AboutPage /></section>
+          <section id="projects"><ProjectPage /></section>
+          <section id="skills"><SkillsPage /></section>
+          <section id="gallery"><Gallery /></section>
+          <section id="contact"><ContactPage /></section>
+          <section id="ratingandfeedback"><RatingAndFeedback /></section>
         </main>
+
         <Footer />
 
+        {/* Scroll to top button */}
         <button
           onClick={scrollToTop}
           className={`
-            fixed bottom-8 right-8 
-            w-12 h-12
-            flex items-center justify-center 
-            rounded-full shadow-lg
+            fixed bottom-8 right-8 z-20
+            w-12 h-12 rounded-full shadow-lg
+            flex items-center justify-center
             transition-all duration-300
-            ${showScrollButton ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0 pointer-events-none'}
-            group
+            ${showScrollButton ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16 pointer-events-none'}
+            
             dark:bg-white dark:text-blue-600
             bg-blue-600 text-slate-50
             hover:scale-110 active:scale-95
-            z-20
           `}
           aria-label="Scroll to top"
         >
-          <ChevronUp
-            className="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1"
-          />
-
-          <span
-            className="
-              absolute -top-8
-              text-sm
-              opacity-0 group-hover:opacity-100
-              transform translate-y-2 group-hover:translate-y-0
-              transition-all duration-300
-              dark:text-white text-gray-800
-              font-medium
-            "
-          >
-            Top
-          </span>
+          <ChevronUp className="w-6 h-6" />
         </button>
       </div>
     </div>

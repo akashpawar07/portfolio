@@ -52,14 +52,14 @@ function Socialmedia() {
 
                 {/* GitHub */}
                 <div className="relative group flex flex-col items-center">
-                    <span className="hidden group-hover:block absolute -top-10 px-2 py-1 bg-gray-800 text-slate-50 text-sm rounded">
+                    <span className="hidden group-hover:block absolute -top-10 px-2 py-1 bg-gray-800 text-slate-50 text-sm rounded" >
                         GitHub
                     </span>
                     <a 
                         href="https://github.com/akashpawar07"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#171515] dark:text-[#fefdff] cursor-pointer text-2xl"
+                        className="text-[#2c083d] dark:text-[#09040e]  cursor-pointer text-2xl"
                     >
                         <ion-icon name="logo-github"></ion-icon>
                     </a>
