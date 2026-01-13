@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'; // Change 1: require -> import
 
 const ratingAndFeedbackSchema = new mongoose.Schema({
     name: {
@@ -14,7 +14,5 @@ const ratingAndFeedbackSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-const ratingAndFeedbackModel = mongoose.model('RatingAndFeedback', ratingAndFeedbackSchema)
-module.exports = ratingAndFeedbackModel
-
-
+const ratingAndFeedbackModel = mongoose.model('RatingAndFeedback', ratingAndFeedbackSchema);
+export default ratingAndFeedbackModel; 

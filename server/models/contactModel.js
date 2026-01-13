@@ -1,22 +1,20 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 
-const contactModel = new mongoose.Schema({
-    userName :{
-        type : String,
+const contactSchema = new mongoose.Schema({
+    userName: {
+        type: String,
         uppercase: true
     },
-    userEmail :{
-        type : String,
+    userEmail: {
+        type: String,
         lowercase: true
     },
-    userMessages:{
+    userMessages: {
         type: String,
-        lowercase : true
+        lowercase: true
     }
+}, { timestamps: true });
 
-},{timestamps:true})
-
-const contactModels = mongoose.model('UserDetails', contactModel)
-module.exports = contactModels
-
-// this is test
+// Exporting the model as a default export for ESM
+const contactModels = mongoose.model('AllContact', contactSchema);
+export default contactModels;

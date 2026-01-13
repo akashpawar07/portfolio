@@ -1,11 +1,15 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose";
 
-//
-const db_connection =  mongoose.connect(process.env.DB_CONNECTION)
-    .then(()=>{
-        console.log("Database connected succssfully ✅ ")
-    }).catch((err)=>{
-        console.error("Somethig went wrong while connecting DB ❌ : ", err)
-    })
+const db_connection = async () => {
+    if (mongoose.connection.readyState >= 1) return; // Already connected
 
-module.exports = db_connection;
+    try {
+        await mongoose.connect(process.env.DB_CONNECTION);
+        console.log("Database connected successfully ✅");
+    } catch (err) {
+        console.error("Something went wrong while connecting DB ❌: ", err);
+        throw err;
+    }
+};
+
+export default db_connection;

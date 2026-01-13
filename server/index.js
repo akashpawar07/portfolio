@@ -1,33 +1,30 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const dotenv = require('dotenv').config();
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+
+// Local Imports - Extensions (.js) are REQUIRED for ESM
+import db_connection from './db/databse.js';
+import contactModels from './models/contactModel.js';
+import ratingAndFeedbackModel from './models/ratingAndFeedbackModel.js';
+import { sendContactEmail } from "./config/sendMailFormat.js";
+
 const app = express();
 const PORT = process.env.PORT || 7070;
 
 // CORS configuration Middleware
 app.use(cors({
-  // Accept requests from specific domains
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl, etc)
     if (!origin) return callback(null, true);
 
     const allowedOrigins = [
-      'http://localhost:5173',
-      'https://akashpawar07.github.io',
-      'https://akashpawar07.github.io/portfolio',
-      'https://akashpawar07.github.io/portfolio/',
-      'https://portfolio-xe40.onrender.com'
+      "http://localhost:5173",
     ];
 
-    // Check if the origin is in the allowed list or matches the render.com pattern
     if (allowedOrigins.includes(origin) || origin.match(/^https:\/\/.*\.onrender\.com$/)) {
       callback(null, true);
     } else {
       console.log('Blocked origin:', origin);
-      // Always allow during troubleshooting - this is the key line
-      callback(null, true);
-      // For production: callback(new Error('Not allowed by CORS'))
+      callback(null, true); // Keep troubleshooting mode as per your original code
     }
   },
   credentials: true,
@@ -35,7 +32,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
-// Explicitly handle preflight requests for all routes
 app.options('*', cors());
 
 // Request body parsing
@@ -43,25 +39,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('dist'));
 
-// Debug middleware to log requests
+// Debug middleware
 app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.originalUrl} - Origin: ${req.headers.origin || 'unknown'}`);
   next();
 });
 
-// Database connection
-const db_connection = require('./db/databse.js');
-const contactModels = require('./models/contactModel.js');
-const ratingAndFeedbackModel = require('./models/ratingAndFeedbackModel.js')
-
-// Contact endpoint with improved error handling
+// Contact endpoint with synchronized DB and Email logic
 app.post('/contact', async (req, res) => {
   try {
-    // console.log("Received contact form data:", req.body);
+    // 1. Ensure DB is connected before proceeding
+    await db_connection();
 
-    // Validate input
     const { username, useremail, usermessage } = req.body;
 
+    // 2. Validation
     if (!username || !useremail || !usermessage) {
       return res.status(400).json({
         success: false,
@@ -69,6 +61,7 @@ app.post('/contact', async (req, res) => {
       });
     }
 
+    // 3. Save to Database
     const details = new contactModels({
       userName: username,
       userEmail: useremail,
@@ -76,121 +69,74 @@ app.post('/contact', async (req, res) => {
     });
 
     const data = await details.save();
+    console.log("Data saved to DB ✅:", data._id);
 
+    // 4. Send Email Notification
+    // We wrap this in its own try/catch so a mail failure doesn't 
+    // break the user's experience if the data is already saved.
+    try {
+      console.log("Attempting to send email...");
+      await sendContactEmail(data.userName, data.userEmail, data.userMessages);
+      console.log("Email sent successfully 📧");
+    } catch (mailError) {
+      console.error('Email sending failed ❌:', mailError.message);
+    }
+
+    // 5. Final Response to Frontend
     res.status(200).json({
       success: true,
-      message: 'Contact details saved successfully',
-      data: data
+      message: 'Message sent successfully! I will get back to you soon.',
+      data: data // This contains the userName for your MessagePopup
     });
 
   } catch (error) {
-    console.error('Error saving contact details:', error);
+    console.error('Final Route Error ❌:', error);
     res.status(500).json({
       success: false,
-      message: 'Error saving contact details',
+      message: 'Internal server error',
       error: error.message
     });
   }
 });
 
-// POST route for creating rating and feedback
+// POST Rating and Feedback
 app.post("/ratingandfeedback", async (req, res) => {
   try {
-    // Validate input
     const { name, rating, comment } = req.body;
-
     if (!name || !rating || !comment) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are mandatory"
-      });
+      return res.status(400).json({ success: false, message: "All fields mandatory" });
     }
 
-    // Validate rating range
-    if (rating < 1 || rating > 5) {
-      return res.status(400).json({
-        success: false,
-        message: "Rating must be between 1 and 5"
-      });
-    }
-
-    // Create new rating and feedback document
-    const inputData = new ratingAndFeedbackModel({
-      name,
-      rating,
-      comment
-    });
-
+    const inputData = new ratingAndFeedbackModel({ name, rating, comment });
     const data = await inputData.save();
 
-    res.status(201).json({
-      success: true,
-      message: 'Rating and feedback saved successfully',
-      data: data
-    });
-
+    res.status(201).json({ success: true, message: 'Saved successfully', data });
   } catch (error) {
-    console.error('Error saving rating and feedback details:', error);
-
-    res.status(500).json({
-      success: false,
-      message: 'Error saving rating and feedback details',
-      error: error.message
-    });
+    res.status(500).json({ success: false, message: 'Error saving feedback', error: error.message });
   }
 });
 
-// GET route for fetching all rating and feedback
+// GET Rating and Feedback
 app.get("/ratingandfeedback", async (req, res) => {
   try {
-    // Fetch data from database
     const data = await ratingAndFeedbackModel.find();
-    console.log("Fetched data:", data);
-
     if (!data || data.length === 0) {
-      console.log("No rating and feedback data found");
-      return res.status(404).json({
-        success: false,
-        message: "No rating and feedback data found"
-      });
+      return res.status(404).json({ success: false, message: "No data found" });
     }
-
-    res.status(200).json({
-      success: true,
-      message: "Rating and feedback data fetched successfully",
-      count: data.length,
-      data: data
-    });
-
+    res.status(200).json({ success: true, data });
   } catch (error) {
-    console.error('Error fetching rating and feedback data:', error);
-
-    res.status(500).json({
-      success: false,
-      message: "Error fetching rating and feedback data",
-      error: error.message
-    });
+    res.status(500).json({ success: false, message: "Error fetching data", error: error.message });
   }
 });
 
-
-
-// Error handling middleware
+// Error handling
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({
-    success: false,
-    message: 'Something went wrong!',
-    error: err.message
-  });
+  res.status(500).json({ success: false, message: 'Something went wrong!s', error: err.message });
 });
 
-// Handle 404
 app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route not found'
-  });
+  res.status(404).json({ success: false, message: 'Route not found' });
 });
 
 app.listen(PORT, () => {
