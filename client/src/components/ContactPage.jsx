@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
-import checkBtn from '../assets/checkBtn.png'
+import axios from 'axios'
 import { useFormik } from 'formik';
 import { formValidationSchema } from '../Schemas/validation'
-import axios from 'axios'
-import RatingAndFeedback from '../components/RatingAndFeedback.jsx'
+import MessagePopup from './MessagePopup';
 
 
 const initialValues = {
@@ -15,6 +14,7 @@ const initialValues = {
 
 function Contact() {
   const [showModal, setShowModal] = useState(false)
+  const [senderName, setSenderName] = React.useState("");
   const [submitError, setSubmitError] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false) // New state for tracking submission
 
@@ -37,86 +37,40 @@ function Contact() {
     onSubmit: async (values, action) => {
       try {
         setSubmitError(null);
-        setIsSubmitting(true); // Set submitting state to true when form is submitted
+        setIsSubmitting(true);
 
-        // Use apiClient instance with relative URL
         const response = await apiClient.post('/contact', values);
+        console.log("server response:", response)
 
-        // Reset form and show modal on successful submission
-        action.resetForm();
-        setShowModal(true);
+        if (response && response.data && response.data.success) {
 
+          action.resetForm();
+          if (typeof setShowModal === 'function') { 
+            setShowModal(response.data.data)
+          }
+        } else {
+          setSubmitError(response?.data?.message || "Failed to save message");
+        }
       } catch (error) {
-        console.error('Error submitting form:', error.response ? error.response.data : error.message);
-
-        // Set specific error message
-        setSubmitError(error.response?.data?.message || 'Failed to submit form. Please try again.');
+        setSubmitError(error.response?.data?.message || "Connection error");
       } finally {
-        setIsSubmitting(false); // Reset submitting state regardless of success or failure
+        setIsSubmitting(false);
       }
     }
+
   });
 
-  // Popup Modal Component
+  // Popup Modal Component inside ContactPage
   const PopupModal = () => {
-    const closeModal = () => setShowModal(false);
+    const handleClose = () => setShowModal(false);
 
     useEffect(() => {
-      document.body.style.overflowY = "hidden";
-
-      return () => {
-        document.body.style.overflowY = "scroll";
-      };
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = "unset"; };
     }, []);
 
-    return (
-      <div className="fixed inset-0 z-[50] flex items-center justify-center
-                    bg-black/40 backdrop-blur-sm px-4">
+    return <MessagePopup closeModal={handleClose} userName={showModal?.userName} />;
 
-        {/* Modal Card */}
-        <div className="relative w-full max-w-md rounded-2xl
-                      bg-white dark:bg-gray-900
-                      shadow-2xl
-                      animate-in fade-in zoom-in duration-300">
-
-          {/* Success Icon */}
-          <div className="flex justify-center -mt-12">
-            <div className="w-20 h-20 rounded-full bg-green-500
-                          flex items-center justify-center shadow-lg">
-              <img
-                src={checkBtn}
-                alt="Success"
-                className="w-10 h-10"
-              />
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="px-6 pt-6 pb-8 text-center">
-            <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
-              Thank You!
-            </h1>
-
-            <p className="mt-3 text-gray-600 dark:text-gray-300 text-base leading-relaxed">
-              Thank you for reaching out. I truly appreciate your message and
-              will get back to you soon.
-            </p>
-
-            {/* Action */}
-            <button
-              onClick={closeModal}
-              className="mt-6 w-full rounded-lg bg-green-500
-                       py-3 font-semibold text-white
-                       hover:bg-green-600
-                       focus:outline-none focus:ring-2 focus:ring-green-400
-                       transition"
-            >
-              Okay
-            </button>
-          </div>
-        </div>
-      </div>
-    );
   };
 
 

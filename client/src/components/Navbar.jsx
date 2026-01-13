@@ -62,7 +62,7 @@ const Navbar = ({
                 onClick={() => handleNavClick(id)}
                 className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition
                   ${active
-                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
+                    ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-200'
                     : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                   }`}
               >
