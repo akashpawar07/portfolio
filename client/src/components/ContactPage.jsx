@@ -6,6 +6,8 @@ import { formValidationSchema } from '../Schemas/validation'
 import MessagePopup from './MessagePopup';
 
 
+const API_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 const initialValues = {
   username: "",
   useremail: "",
@@ -39,20 +41,19 @@ function Contact() {
         setSubmitError(null);
         setIsSubmitting(true);
 
+        // Using the relative path because baseURL is already set in apiClient
         const response = await apiClient.post('/contact', values);
-        console.log("server response:", response)
 
-        if (response && response.data && response.data.success) {
-
+        if (response.data?.success) {
+          setSenderName(response.data.data?.userName || values.username);
+          setShowModal(true);
           action.resetForm();
-          if (typeof setShowModal === 'function') { 
-            setShowModal(response.data.data)
-          }
         } else {
-          setSubmitError(response?.data?.message || "Failed to save message");
+          setSubmitError(response.data?.message || "Failed to save message");
         }
       } catch (error) {
-        setSubmitError(error.response?.data?.message || "Connection error");
+        // Axios puts the server response in error.response
+        setSubmitError(error.response?.data?.message || "Connection error occurred");
       } finally {
         setIsSubmitting(false);
       }

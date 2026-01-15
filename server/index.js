@@ -17,7 +17,12 @@ app.use(cors({
     if (!origin) return callback(null, true);
 
     const allowedOrigins = [
+      `${BASE_URL}`,
+      `${BASE_URL}/contact`,
       "http://localhost:5173",
+      "http://localhost:5173/portfolio/",
+      "https://akashpawar07.github.io/portfolio/",
+      "https://akashpawar07.github.io/portfolio/contact"
     ];
 
     if (allowedOrigins.includes(origin) || origin.match(/^https:\/\/.*\.onrender\.com$/)) {
@@ -45,11 +50,13 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // Contact endpoint with synchronized DB and Email logic
 app.post('/contact', async (req, res) => {
+  await db_connection();
   try {
     // 1. Ensure DB is connected before proceeding
-    await db_connection();
+
 
     const { username, useremail, usermessage } = req.body;
 
@@ -69,11 +76,9 @@ app.post('/contact', async (req, res) => {
     });
 
     const data = await details.save();
-    console.log("Data saved to DB ✅:", data._id);
+    console.log("Data saved to DB ✅");
 
     // 4. Send Email Notification
-    // We wrap this in its own try/catch so a mail failure doesn't 
-    // break the user's experience if the data is already saved.
     try {
       console.log("Attempting to send email...");
       await sendContactEmail(data.userName, data.userEmail, data.userMessages);

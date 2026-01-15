@@ -15,7 +15,6 @@ export default function PortfolioRating() {
   const [error, setError] = useState(null);
 
   const API_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
-  // const API_BASE_URL = 'https://portfolio-xe40.onrender.com'
 
   const fetchReviews = async () => {
     try {
