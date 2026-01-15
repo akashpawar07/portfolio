@@ -12,30 +12,31 @@ const app = express();
 const PORT = process.env.PORT || 7070;
 
 // CORS configuration Middleware
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://akashpawar07.github.io" // REMOVE the sub-paths (/portfolio, etc.)
+];
+
 app.use(cors({
   origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
     if (!origin) return callback(null, true);
 
-    const allowedOrigins = [
-      `${BASE_URL}`,
-      `${BASE_URL}/contact`,
-      "http://localhost:5173",
-      "http://localhost:5173/portfolio/",
-      "https://akashpawar07.github.io/portfolio/",
-      "https://akashpawar07.github.io/portfolio/contact"
-    ];
+    const isAllowed = allowedOrigins.includes(origin) ||
+      origin.match(/^https:\/\/.*\.onrender\.com$/);
 
-    if (allowedOrigins.includes(origin) || origin.match(/^https:\/\/.*\.onrender\.com$/)) {
+    if (isAllowed) {
       callback(null, true);
     } else {
       console.log('Blocked origin:', origin);
-      callback(null, true); // Keep troubleshooting mode as per your original code
+      callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
+
 
 app.options('*', cors());
 
