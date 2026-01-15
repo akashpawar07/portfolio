@@ -4,7 +4,6 @@ import React from "react";
 
 
 export default function MessagePopup({ closeModal, userName }) {
-    console.log("name in modal:",userName)
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
             {/* Modal Card */}

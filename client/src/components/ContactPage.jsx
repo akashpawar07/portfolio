@@ -6,8 +6,6 @@ import { formValidationSchema } from '../Schemas/validation'
 import MessagePopup from './MessagePopup';
 
 
-const API_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
-
 const initialValues = {
   username: "",
   useremail: "",
