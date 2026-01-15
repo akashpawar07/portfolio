@@ -50,6 +50,7 @@ export const sendContactConfirmationEmailHTMLBody = (senderName, senderEmail, se
 // send contact email
 export const sendContactEmail = async (senderName, senderEmail, senderMessage) => {
     const transporter = createTransporter();
+    console.log(`name${senderName}, email${senderEmail}, message${senderMessage}- in mail transpot`)
 
     try {
         // Verify connection configuration

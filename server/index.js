@@ -83,7 +83,8 @@ app.post('/contact', async (req, res) => {
     try {
       console.log("Attempting to send email...");
       await sendContactEmail(data.userName, data.userEmail, data.userMessages);
-      console.log("Email sent successfully 📧");
+      console.log("Email sent successfully");
+      console.log(`name${data.userName}, email${data.userEmail}, message${data.userMessages} - in index.js`)
     } catch (mailError) {
       console.error('Email sending failed ❌:', mailError.message);
     }
