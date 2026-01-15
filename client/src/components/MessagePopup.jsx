@@ -1,6 +1,3 @@
-import React from "react";
-// Make sure checkBtn is actually imported if it's a local file
-// import checkBtn from '../assets/check.png'; 
 
 
 export default function MessagePopup({ closeModal, userName }) {

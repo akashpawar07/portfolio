@@ -41,6 +41,7 @@ function Contact() {
 
         // Using the relative path because baseURL is already set in apiClient
         const response = await apiClient.post('/contact', values);
+        console.log(response.data.data?.userName || values.username)
 
         if (response.data?.success) {
           setSenderName(response.data.data?.userName || values.username);
@@ -59,7 +60,6 @@ function Contact() {
 
   });
 
-  // Popup Modal Component inside ContactPage
   const PopupModal = () => {
     const handleClose = () => setShowModal(false);
 
@@ -68,8 +68,8 @@ function Contact() {
       return () => { document.body.style.overflow = "unset"; };
     }, []);
 
-    return <MessagePopup closeModal={handleClose} userName={showModal?.userName} />;
-
+    // FIX: Pass 'senderName' instead of 'showModal?.userName'
+    return <MessagePopup closeModal={handleClose} userName={senderName} />;
   };
 
 
