@@ -8,6 +8,7 @@ import contactModels from './models/contactModel.js';
 import ratingAndFeedbackModel from './models/ratingAndFeedbackModel.js';
 import { sendContactEmail } from "./config/sendMailFormat.js";
 
+db_connection();
 const app = express();
 const PORT = process.env.PORT || 7070;
 
