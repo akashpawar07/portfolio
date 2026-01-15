@@ -9,7 +9,9 @@ export const createTransporter = () => {
     return nodemailer.createTransport({
         host: process.env.EMAIL_HOST || "smtp.gmail.com",
         port: parseInt(process.env.EMAIL_PORT || "465"),
-        secure: true, // true for 465, false for other ports
+        secure: true,
+        pool: true, // Use pooling for better performance
+        connectionTimeout: 10000, // 10 seconds timeout
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS,
