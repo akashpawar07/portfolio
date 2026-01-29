@@ -153,7 +153,7 @@ export default function PortfolioRating() {
         // Reset success message after 3 seconds
         setTimeout(() => {
           setIsSubmitted(false);
-        }, 4000);
+        }, 7000);
       } catch (err) {
         setError('Failed to submit review. Please try again.');
         // console.error('Error submitting review:', err.response?.data || err.message);
@@ -299,44 +299,35 @@ export default function PortfolioRating() {
         </div>
       </div>
 
-      {/* Success Modal */}
+       {/* Success Modal */}
       {isSubmitted && (
-        <div className="fixed inset-0 z-[50] flex items-center justify-center
-                  bg-black/40 backdrop-blur-sm px-4">
-
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4">
           {/* Modal Card */}
-          <div className="relative w-full max-w-md rounded-2xl
-                    bg-white dark:bg-gray-900
-                    shadow-2xl
-                    animate-in fade-in zoom-in duration-300">
+          <div className="relative w-full max-w-sm rounded-3xl bg-white dark:bg-gray-900 p-8 shadow-2xl animate-in fade-in zoom-in duration-300">
 
             {/* Success Icon */}
-            <div className="flex justify-center -mt-12">
-              <div className="w-20 h-20 rounded-full bg-green-500
-                        flex items-center justify-center shadow-lg">
-                <Check className="w-10 h-10 text-white" />
+            <div className="absolute -top-12 left-1/2 -translate-x-1/2">
+              <div className="w-24 h-24 rounded-full bg-[#22c55e] flex items-center justify-center shadow-xl ring-8 ring-white dark:ring-gray-900">
+                <Check className="w-12 h-12 text-white" />
               </div>
             </div>
 
             {/* Content */}
-            <div className="px-6 pt-6 pb-8 text-center">
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-white">
+            <div className="mt-8 text-center">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-slate-700">
                 Review Submitted!
               </h1>
 
-              <p className="mt-3 text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+              <p className="mt-4 text-gray-600 dark:text-gray-800 text-base leading-relaxed">
                 Thank you for taking the time to share your feedback.
                 Your review truly helps me improve and grow.
               </p>
 
               {/* Action */}
               <button
+                type="button"
                 onClick={closeSuccessModal}
-                className="mt-6 w-full rounded-lg bg-green-500
-                     py-3 font-semibold text-white
-                     hover:bg-green-600
-                     focus:outline-none focus:ring-2 focus:ring-green-400
-                     transition"
+                className="mt-8 w-full rounded-xl bg-[#22c55e] hover:bg-[#1da850] py-4 font-bold text-white shadow-lg shadow-green-500/20 transition-all active:scale-95"
               >
                 Got it
               </button>
