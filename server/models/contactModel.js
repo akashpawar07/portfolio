@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 const contactSchema = new mongoose.Schema({
     userName: {
         type: String,
-        uppercase: true
     },
     userEmail: {
         type: String,

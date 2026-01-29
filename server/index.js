@@ -1,5 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
+import { fileURLToPath } from 'url';
+import path from 'path';
 import cors from 'cors';
 
 // Local Imports - Extensions (.js) are REQUIRED for ESM
@@ -11,6 +13,10 @@ import { sendContactEmail } from "./config/sendMailFormat.js";
 db_connection();
 const app = express();
 const PORT = process.env.PORT || 7070;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const logoPath = path.join(__dirname, 'public', 'favIcon.svg');
 
 // CORS configuration Middleware
 const allowedOrigins = [
@@ -82,9 +88,13 @@ app.post('/contact', async (req, res) => {
     // 4. Send Email Notification
     try {
       console.log("Attempting to send email...");
-      await sendContactEmail(data.userName, data.userEmail, data.userMessages);
+
+      await sendContactEmail(data.userName, data.userEmail, data.userMessages, logoPath);
+
       console.log("Email sent successfully");
+
       console.log(`name:${data.userName}, email:${data.userEmail}, message:${data.userMessages} - in index.js`)
+
     } catch (mailError) {
       console.error('Email sending failed ❌:', mailError.message);
     }
