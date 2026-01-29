@@ -55,11 +55,10 @@ app.use((req, res, next) => {
 
 // Contact endpoint with synchronized DB and Email logic
 app.post('/contact', async (req, res) => {
+  // 1. Ensure DB is connected before proceeding
   await db_connection();
+
   try {
-    // 1. Ensure DB is connected before proceeding
-
-
     const { username, useremail, usermessage } = req.body;
 
     // 2. Validation
@@ -85,7 +84,7 @@ app.post('/contact', async (req, res) => {
       console.log("Attempting to send email...");
       await sendContactEmail(data.userName, data.userEmail, data.userMessages);
       console.log("Email sent successfully");
-      console.log(`name${data.userName}, email${data.userEmail}, message${data.userMessages} - in index.js`)
+      console.log(`name:${data.userName}, email:${data.userEmail}, message:${data.userMessages} - in index.js`)
     } catch (mailError) {
       console.error('Email sending failed ❌:', mailError.message);
     }
@@ -94,7 +93,7 @@ app.post('/contact', async (req, res) => {
     res.status(200).json({
       success: true,
       message: 'Message sent successfully! I will get back to you soon.',
-      data: data // This contains the userName for your MessagePopup
+      data: data // This contains the userName for MessagePopup
     });
 
   } catch (error) {
