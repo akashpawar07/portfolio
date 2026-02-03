@@ -4,11 +4,10 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import cors from 'cors';
 
-// Local Imports - Extensions (.js) are REQUIRED for ESM
 import db_connection from './db/databse.js';
 import contactModels from './models/contactModel.js';
 import ratingAndFeedbackModel from './models/ratingAndFeedbackModel.js';
-import { sendContactEmail } from "./config/sendMailFormat.js";
+// import { sendContactEmail } from "./config/sendMailFormat.js";
 
 db_connection();
 const app = express();
@@ -21,12 +20,11 @@ const logoPath = path.join(__dirname, 'public', 'favIcon.svg');
 // CORS configuration Middleware
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://akashpawar07.github.io" // REMOVE the sub-paths (/portfolio, etc.)
+  "https://akashpawar07.github.io"
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl)
     if (!origin) return callback(null, true);
 
     const isAllowed = allowedOrigins.includes(origin) ||
@@ -43,8 +41,6 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
-
-
 app.options('*', cors());
 
 // Request body parsing
@@ -86,18 +82,18 @@ app.post('/contact', async (req, res) => {
     console.log("Data saved to DB ✅");
 
     // 4. Send Email Notification
-    try {
-      console.log("Attempting to send email...");
+    // try {
+    //   console.log("Attempting to send email...");
 
-      await sendContactEmail(data.userName, data.userEmail, data.userMessages, logoPath);
+    //   await sendContactEmail(data.userName, data.userEmail, data.userMessages, logoPath);
 
-      console.log("Email sent successfully");
+    //   console.log("Email sent successfully");
 
-      console.log(`name:${data.userName}, email:${data.userEmail}, message:${data.userMessages} - in index.js`)
+    //   console.log(`name:${data.userName}, email:${data.userEmail}, message:${data.userMessages} - in index.js`)
 
-    } catch (mailError) {
-      console.error('Email sending failed ❌:', mailError.message);
-    }
+    // } catch (mailError) {
+    //   console.error('Email sending failed ❌:', mailError.message);
+    // }
 
     // 5. Final Response to Frontend
     res.status(200).json({
