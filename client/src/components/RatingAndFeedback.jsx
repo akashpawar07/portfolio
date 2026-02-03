@@ -249,7 +249,7 @@ export default function PortfolioRating() {
 
   if (loading) {
     return (
-      <div className="md:w-[95vw] md:h-[75vh] md:ml-16 p-4 sm:mx-2 md:p-6  bg-neutral-100 rounded-md shadow-lg">
+      <div className="md:w-[99vw] md:h-[99vh] md:ml-1 p-4 sm:mx-2 md:p-6  bg-neutral-100 rounded-md shadow-lg">
         <div className="flex items-center justify-center py-20">
           <div className="text-slate-600 text-3xl">Loading reviews...</div>
         </div>
